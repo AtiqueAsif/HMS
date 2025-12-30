@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tele-Online Consultation - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold" style="margin-top:40px;">Tele-Online Consultation</h1>
+            <p class="lead text-muted">Consult with doctors online from the comfort of your home</p>
+        </div>
+
+        <!-- Success Notification Panel -->
+        <div id="successNotification" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+                <div>
+                    <strong>Tele-Consultation Request Accepted!</strong>
+                    <p class="mb-0">Your tele-consultation request has been successfully submitted. You will be notified once it is confirmed.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="text-center mb-4">
+            <button class="btn btn-primary btn-lg" id="teleOnlineBtn">
+                <i class="bi bi-telephone me-2"></i>View Available Tele-Doctors
+            </button>
+        </div>
+
+        <div id="doctorListSection" class="d-none">
+            <div class="row g-4" id="doctorCards"></div>
+        </div>
+    </main>
+
+    <!-- Appointment Form Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request Tele-Consultation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullname" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Age</label>
+                                <input type="number" class="form-control" id="age" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Gender</label>
+                                <select class="form-select" id="gender" required>
+                                    <option value="">Select</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="+8801XXXXXXXXX" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Department</label>
+                                <select class="form-select" id="department" required></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Doctor Name</label>
+                                <input type="text" class="form-control" id="doctor" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preferred Date</label>
+                                <input type="date" class="form-control" id="date" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preferred Time</label>
+                                <select class="form-select" id="time" required>
+                                    <option value="">Select</option>
+                                    <option>09:00 AM - 11:00 AM</option>
+                                    <option>11:00 AM - 01:00 PM</option>
+                                    <option>02:00 PM - 04:00 PM</option>
+                                    <option>04:00 PM - 06:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About HMS</a></li>
+                        <li><a href="emergency.html">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="tele-consultation.html">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency & Trauma</a></li>
+                        <li><a href="appointments.html">Appointments</a></li>
+                        <li><a href="funding.html">Funding & NGO Support</a></li>
+                        <li><a href="online-report.html">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="patient-portal-login.html">Patient Portal</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="emergency.html">Ambulance Booking</a></li>
+                        <li><a href="pandemic.html">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        const teleOnlineBtn = document.getElementById('teleOnlineBtn');
+        const doctorListSection = document.getElementById('doctorListSection');
+        const formModal = new bootstrap.Modal(document.getElementById('formModal'));
+        const departmentSelect = document.getElementById('department');
+        const doctorInput = document.getElementById('doctor');
+        let doctorsByDept = {};
+
+        async function loadDoctors() {
+            try {
+                const response = await fetch(`${API_BASE}/doctors`);
+                const allDoctors = await response.json();
+                
+                doctorsByDept = {};
+                allDoctors.forEach(doc => {
+                    if (!doctorsByDept[doc.department]) {
+                        doctorsByDept[doc.department] = [];
+                    }
+                    doctorsByDept[doc.department].push(doc);
+                });
+
+                departmentSelect.innerHTML = `<option value="">Select</option>${Object.keys(doctorsByDept).map(d => `<option>${d}</option>`).join('')}`;
+            } catch (error) {
+                console.error('Error loading doctors:', error);
+            }
+        }
+
+        teleOnlineBtn.addEventListener('click', async () => {
+            await loadDoctors();
+            const doctorCards = document.getElementById('doctorCards');
+            doctorCards.innerHTML = '';
+            
+            Object.keys(doctorsByDept).forEach(dept => {
+                const deptHeading = document.createElement('div');
+                deptHeading.className = 'col-12';
+                deptHeading.innerHTML = `<h3 class="text-primary mb-3">${dept} Department Tele-Doctors</h3>`;
+                doctorCards.appendChild(deptHeading);
+                
+                doctorsByDept[dept].forEach(doc => {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6 col-lg-4';
+                    col.innerHTML = `
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">${doc.name}</h5>
+                                <p class="card-text"><strong>Qualification:</strong> ${doc.qualification || 'N/A'}</p>
+                                <p class="card-text"><strong>Experience:</strong> ${doc.experienceLevel || 'N/A'}</p>
+                                <p class="card-text"><strong>Department:</strong> ${doc.department}</p>
+                                <p class="card-text text-success"><i class="bi bi-telephone me-1"></i>Tele-Consultation Available</p>
+                                <button class="btn btn-primary w-100 request-btn" data-doctor="${doc.name}" data-dept="${doc.department}">Request Tele-Consultation</button>
+                            </div>
+                        </div>
+                    `;
+                    doctorCards.appendChild(col);
+                });
+            });
+            doctorListSection.classList.remove('d-none');
+        });
+
+        document.addEventListener('click', e => {
+            if (e.target && e.target.classList.contains('request-btn')) {
+                const doctorName = e.target.dataset.doctor;
+                const deptText = e.target.dataset.dept;
+                doctorInput.value = doctorName;
+                departmentSelect.value = deptText;
+                formModal.show();
+            }
+        });
+
+        document.getElementById('appointmentForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const selectedDept = departmentSelect.value.trim();
+            const doctorName = doctorInput.value.trim();
+
+            let doctorId = null;
+            if (doctorsByDept[selectedDept]) {
+                const doctor = doctorsByDept[selectedDept].find(d => d.name === doctorName);
+                if (doctor) doctorId = doctor.id;
+            }
+
+            if (!doctorId) {
+                alert(`Error: Doctor ${doctorName} not found in ${selectedDept} department.`);
+                return;
+            }
+
+            const appointmentData = {
+                doctorId: doctorId,
+                appointmentDate: document.getElementById('date').value,
+                appointmentTime: document.getElementById('time').value.split(' - ')[0],
+                type: 'ONLINE',
+                department: selectedDept,
+                symptoms: `Tele-consultation request for ${document.getElementById('fullname').value}`
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/appointments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(appointmentData)
+                });
+
+                if (response.ok) {
+                    // Show success notification panel instead of alert
+                    document.getElementById('successNotification').classList.remove('d-none');
+                    formModal.hide();
+                    document.getElementById('appointmentForm').reset();
+                    
+                    // Hide the notification after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('successNotification').classList.add('d-none');
+                    }, 5000);
+                } else {
+                    alert('Error submitting request. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting request. Please try again.');
+            }
+        });
+
+        document.getElementById('date').setAttribute('min', new Date().toISOString().split('T')[0]);
+    </script>
+</body>
+</html>

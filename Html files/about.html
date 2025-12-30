@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >About Us - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Add padding to body to accommodate fixed navbar */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status Notification -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="connectionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-wifi me-2" id="connectionIcon"></i>
+                <strong class="me-auto" id="connectionTitle">Checking Connection...</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="connectionMessage">
+                Connecting to backend server...
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="display-4 fw-bold mb-3" style="margin-top:20px;">About Us</h1>
+                <p class="lead text-muted">Transforming healthcare through modern technology</p>
+            </div>
+        </div>
+
+        <!-- Introduction Section -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body p-5">
+                        <h2 class="fw-bold mb-4">Who We Are</h2>
+                        <p class="lead mb-4">We are a team committed to improving healthcare through modern technology. Noticing that many hospitals still rely on outdated, manual processes, we developed the Hospital Management System (HMS)—a smart and connected platform that digitizes hospital operations and improves coordination between patients, doctors, and multiple hospitals.</p>
+                        <p class="mb-3">Our system simplifies appointment booking, manages patient records, supports emergency transport, helps patients receive funding, and provides real-time updates during pandemics. With HMS, we aim to make healthcare faster, safer, and more accessible for everyone.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision and Mission Section -->
+        <div class="row mb-5">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-eye fs-3 text-primary"></i>
+                            </div>
+                            <h2 class="fw-bold mb-0">Our Vision</h2>
+                        </div>
+                        <p class="lead">Our vision is to build an advanced, interconnected Hospital Management System that allows hospitals, patients, and medical staff to communicate and operate seamlessly. We strive for a future where healthcare is efficient, smart, and accessible to all, supported by a unified digital platform.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-5">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-bullseye fs-3 text-success"></i>
+                            </div>
+                            <h2 class="fw-bold mb-0">Our Mission</h2>
+                        </div>
+                        <p class="lead">Our mission is to modernize traditional hospital processes by creating a digital system that enhances efficiency, reduces errors, and improves patient experience. We aim to automate key tasks, strengthen inter-hospital coordination, support emergency and funding services, and provide a secure, scalable platform that adapts to the growing needs of the healthcare sector.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-5">
+            <div class="card-body p-5">
+                <h2 class="fw-bold mb-4 text-center">Why Choose Us</h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-heart-pulse fs-2 text-primary"></i>
+                        </div>
+                        <h5>Compassionate Care</h5>
+                        <p class="text-muted small">Patient-centered approach to healthcare</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-check fs-2 text-success"></i>
+                        </div>
+                        <h5>Expert Doctors</h5>
+                        <p class="text-muted small">Highly qualified medical professionals</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-clock-history fs-2 text-info"></i>
+                        </div>
+                        <h5>24/7 Services</h5>
+                        <p class="text-muted small">Round-the-clock emergency care</p>
+                    </div>
+                    <div class="col-md-6 col-lg-3 text-center">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-geo-alt fs-2 text-warning"></i>
+                        </div>
+                        <h5>Easy Access</h5>
+                        <p class="text-muted small">Conveniently located facilities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm bg-light">
+            <div class="card-body p-5">
+                <h2 class="fw-bold mb-4">Contact Information</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="fw-bold mb-3">Address</h5>
+                        <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>University of Liberal Arts Bangladesh</p>
+                        <p class="mb-2">688 Beribadh Road, Mohammadpur</p>
+                        <p>Dhaka, Bangladesh</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="fw-bold mb-3">Contact</h5>
+                        <p class="mb-2"><i class="bi bi-telephone me-2"></i>+88-02-48118001-6</p>
+                        <p class="mb-2"><i class="bi bi-envelope me-2"></i>info@ulab.edu.bd</p>
+                        <p><i class="bi bi-exclamation-triangle me-2"></i>+88-02-223361301</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+

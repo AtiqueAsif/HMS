@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Support - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Add padding to body to accommodate fixed navbar */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status Notification -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="connectionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-wifi me-2" id="connectionIcon"></i>
+                <strong class="me-auto" id="connectionTitle">Checking Connection...</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="connectionMessage">
+                Connecting to backend server...
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">AI Support</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow border-0">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="text-center mb-4">
+                            <div class="bg-dark bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-cpu fs-1 text-dark"></i>
+                            </div>
+                            <h1 class="h2 fw-bold mb-2">AI Support</h1>
+                            <p class="text-muted">Get answers from our AI assistant</p>
+                        </div>
+
+                        <p class="text-muted mb-4">Ask general health or system-related questions. Please do not share personal or sensitive medical data.</p>
+                        
+                        <form id="ai-form" class="mb-4">
+                            <div class="mb-3">
+                                <label for="ai-question" class="form-label">Your question</label>
+                                <textarea id="ai-question" class="form-control" rows="4" placeholder="Type your question here..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-stars me-2"></i>Ask AI
+                            </button>
+                            <span id="ai-status" class="ms-3 text-muted small"></span>
+                        </form>
+                        
+                        <div id="ai-response" class="border rounded p-4 bg-white mb-4" style="min-height: 120px;">
+                            <span class="text-muted">AI responses will appear here.</span>
+                        </div>
+
+                        <div class="mt-5">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h3 class="h5 fw-semibold mb-3">AI Settings</h3>
+                                    <form id="ai-settings-form">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">OpenRouter API Key</label>
+                                                <input type="password" class="form-control" id="openrouterKey" placeholder="sk-or-v1-...">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Model</label>
+                                                <select class="form-select" id="openrouterModel">
+                                                    <option value="openai/gpt-4o">openai/gpt-4o</option>
+                                                    <option value="deepseek/deepseek-r1">deepseek/deepseek-r1</option>
+                                                    <option value="qwen/qwen-3-8b-instruct">qwen/qwen-3-8b-instruct</option>
+                                                    <option value="google/gemini-2.5-flash">Google: Gemini 2.5 Flash</option>
+                                                    <option value="qwen/qwen3-coder">Qwen3 Coder 480B A35B</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">HTTP Referer</label>
+                                                <input type="text" class="form-control" id="openrouterReferer" placeholder="https://your-site.example">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">X-Title</label>
+                                                <input type="text" class="form-control" id="openrouterTitle" placeholder="HMS">
+                                            </div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <button type="submit" class="btn btn-outline-secondary">Save Settings</button>
+                                            <span id="ai-settings-status" class="ms-3 text-muted small"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About HMS</a></li>
+                        <li><a href="emergency.html">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="tele-consultation.html">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="emergency.html">Emergency & Trauma</a></li>
+                        <li><a href="appointments.html">Appointments</a></li>
+                        <li><a href="funding.html">Funding & NGO Support</a></li>
+                        <li><a href="online-report.html">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="patient-portal-login.html">Patient Portal</a></li>
+                        <li><a href="doctors.html">Find a Doctor</a></li>
+                        <li><a href="emergency.html">Ambulance Booking</a></li>
+                        <li><a href="pandemic.html">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>window.OPENROUTER_API_KEY='';window.OPENROUTER_REFERER='';window.OPENROUTER_TITLE='HMS';</script>
+    <script src="js/openrouter.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize AI integration when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initAIIntegration();
+            initAISettings();
+            
+            // Hide settings section if API key is already set
+            const savedKey = localStorage.getItem('openrouter_api_key') || '';
+            const settingsCard = document.querySelector('.mt-5');
+            if (savedKey && settingsCard) {
+                settingsCard.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

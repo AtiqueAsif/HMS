@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Hospital Management System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Section visibility control */
+        .app-section {
+            display: none;
+        }
+        .app-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Service card border styling */
+        .card {
+            border: none !important;
+            border-radius: 0; /* Square shape */
+        }
+        #diagnostic .card-title {
+            margin-top: 40px;
+        }
+        
+        /* Add padding to body to accommodate fixed navbar */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Service Category Selection -->
+        <section id="services" class="app-section active">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3" style="margin-top:40px;">Choose a Service Category</h2>
+                <p class="lead text-muted">Select from hospital or diagnostic services</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm" style="cursor: pointer;" onclick="openSection('hospital')">
+                        <div class="card-body text-center p-5">
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-hospital fs-1 text-primary"></i>
+                            </div>
+                            <h3 class="card-title fw-bold">Hospital Services</h3>
+                            <p class="card-text text-muted">Doctor information, pharmacy, emergency, billing and more</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm" style="cursor: pointer;" onclick="openSection('diagnostic')">
+                        <div class="card-body text-center p-5">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-heart-pulse fs-1 text-success"></i>
+                            </div>
+                            <h3 class="card-title fw-bold">Diagnostic Services</h3>
+                            <p class="card-text text-muted">Blood tests, X-ray, ECG, ultrasound and health packages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="index.html" class="btn btn-outline-primary">Back to Home</a>
+            </div>
+        </section>
+
+        <!-- Hospital Services -->
+        <section id="hospital" class="app-section">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3" style="margin-top:40px;">Hospital Services</h2>
+                <p class="lead text-muted">Comprehensive hospital services for all your healthcare needs</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('appointment')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-person-badge fs-3 text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Doctor Information</h5>
+                            <p class="card-text text-muted small">Find expert doctors across all specialties</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('pharmacy')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-capsule fs-3 text-success"></i>
+                            </div>
+                            <h5 class="card-title">Pharmacy</h5>
+                            <p class="card-text text-muted small">24/7 pharmacy with all medicines</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('emergency')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-heart-pulse-fill fs-3 text-danger"></i>
+                            </div>
+                            <h5 class="card-title">Emergency</h5>
+                            <p class="card-text text-muted small">24/7 emergency services available</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('transfer')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-arrow-left-right fs-3 text-warning"></i>
+                            </div>
+                            <h5 class="card-title">Transfer Information</h5>
+                            <p class="card-text text-muted small">Track patient transfers between departments</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('billing')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-receipt fs-3 text-info"></i>
+                            </div>
+                            <h5 class="card-title">Billing</h5>
+                            <p class="card-text text-muted small">Transparent billing and payment services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('operation')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-secondary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-scissors fs-3 text-secondary"></i>
+                            </div>
+                            <h5 class="card-title">Operation & Surgery</h5>
+                            <p class="card-text text-muted small">Advanced surgical facilities</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('admitted')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-hospital fs-3 text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Admitted Patient Information</h5>
+                            <p class="card-text text-muted small">View admitted patients information</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('staffs')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-people fs-3 text-success"></i>
+                            </div>
+                            <h5 class="card-title">Information of Staffs</h5>
+                            <p class="card-text text-muted small">Hospital staff directory and contacts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('services')">Back to Services</button>
+            </div>
+        </section>
+
+        <!-- Doctor Information -->
+        <section id="appointment" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Our Departments & Doctors</h2>
+                <p class="text-muted">Expert doctors across all specialties</p>
+            </div>
+            
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Cardiology</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">General medicine and internal medicine services</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. James Carter</td><td>MBBS, MD</td></tr>
+                                <tr><td>2</td><td>Dr. Olivia Green</td><td>MBBS, MD</td></tr>
+                                <tr><td>3</td><td>Dr. Fatema Begum</td><td>MBBS, MD</td></tr>
+                                <tr><td>4</td><td>Dr. Robert King</td><td>MD, Internal Medicine Specialist</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Cardiology</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Heart and cardiovascular system treatment</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. James Carter</td><td>MD, Heart Specialist</td></tr>
+                                <tr><td>2</td><td>Dr. Emily Stone</td><td>MBBS, MD, Cardiac Surgeon</td></tr>
+                                <tr><td>3</td><td>Dr. Saifuddin Ahmed</td><td>DM Cardiology, Interventional Cardiologist</td></tr>
+                                <tr><td>4</td><td>Dr. Olivia Turner</td><td>MD, Cardiac Rehab Expert</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Neurology</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Brain and nervous system disorders</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. William Smith</td><td>MBBS, MD, Neurosurgeon</td></tr>
+                                <tr><td>2</td><td>Dr. Ava Johnson</td><td>DM Neurology, Neurophysiologist</td></tr>
+                                
+                                <tr><td>4</td><td>Dr. Nusrat Jahan</td><td>DM Neurology, Neuro Rehab Expert</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Orthopedics</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Bone, joint, and musculoskeletal system care</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                 <tr><td>3</td><td>Dr. Rahim Abdullah</td><td>MS Orthopedics, Spinal Surgeon</td></tr>
+                                <tr><td>1</td><td>Dr. Henry Davis</td><td>MS Orthopedics, Bone & Joint Specialist</td></tr>
+                                <tr><td>2</td><td>Dr. Charlotte Lewis</td><td>MS Sports Medicine, Sports Injury Specialist</td></tr>
+                               
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+             <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Critical Care & Trauma</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Critical Care & Trauma Management</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. Mahmud Hasan</td><td>MD, Heart Specialist</td></tr>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Dermatology</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Skin, hair, and nail care</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2</td><td>Dr. Sabrina Chowdhury</td><td>MD Cosmetic Dermatology</td></tr>
+                                <tr><td>1</td><td>Dr. Amelia Scott</td><td>MD Dermatology, Skin Specialist</td></tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">ENT</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Ear, Nose & Throat (ENT) Care</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2</td><td>Dr. Jannatul Ferdous</td><td>ENT Care</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Child Development / Counselling</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Pediatric care and child development services</p>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Name</th><th>Specialty</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Dr. Sarah Mitchell</td><td>PhD, Clinical Psychologist</td></tr>
+                                <tr><td>2</td><td>Dr. Daniel Perez</td><td>MA, Licensed Counsellor</td></tr>
+                                <tr><td>3</td><td>Dr. Emily Foster</td><td>MS, Mental Health Specialist</td></tr>
+                                <tr><td>4</td><td>Dr. Laura Simmons</td><td>PsyD, Child & Adolescent Counsellor</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+            </div>
+        </section>
+
+        <!-- Pharmacy -->
+        <section id="pharmacy" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Pharmacy</h2>
+                <p class="text-muted">24/7 pharmacy services with all essential medicines</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Available Medicines</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Medicine Name</th><th>Type</th><th>Price (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Paracetamol</td><td>Tablet</td><td>1.5</td></tr>
+                                <tr><td>2</td><td>Ibuprofen</td><td>Tablet</td><td>2.0</td></tr>
+                                <tr><td>3</td><td>Aspirin</td><td>Tablet</td><td>1.8</td></tr>
+                                <tr><td>4</td><td>Amoxicillin</td><td>Capsule</td><td>3.2</td></tr>
+                                <tr><td>5</td><td>Ciprofloxacin</td><td>Tablet</td><td>4.0</td></tr>
+                                <tr><td>6</td><td>Azithromycin</td><td>Tablet</td><td>3.5</td></tr>
+                                <tr><td>7</td><td>Metronidazole</td><td>Tablet</td><td>2.5</td></tr>
+                                <tr><td>8</td><td>Omeprazole</td><td>Capsule</td><td>2.2</td></tr>
+                                <tr><td>9</td><td>Ranitidine</td><td>Tablet</td><td>1.8</td></tr>
+                                <tr><td>10</td><td>Antacids</td><td>Tablet</td><td>1.2</td></tr>
+                                <tr><td>11</td><td>Salbutamol</td><td>Inhaler</td><td>6.0</td></tr>
+                                <tr><td>12</td><td>Prednisolone</td><td>Tablet</td><td>2.5</td></tr>
+                                <tr><td>13</td><td>Dexamethasone</td><td>Tablet</td><td>2.0</td></tr>
+                                <tr><td>14</td><td>Insulin</td><td>Injection</td><td>10.0</td></tr>
+                                <tr><td>15</td><td>Glibenclamide</td><td>Tablet</td><td>1.5</td></tr>
+                                <tr><td>16</td><td>Atenolol</td><td>Tablet</td><td>2.0</td></tr>
+                                <tr><td>17</td><td>Losartan</td><td>Tablet</td><td>2.2</td></tr>
+                                <tr><td>18</td><td>Furosemide</td><td>Tablet</td><td>1.5</td></tr>
+                                <tr><td>19</td><td>Warfarin</td><td>Tablet</td><td>3.0</td></tr>
+                                <tr><td>20</td><td>Morphine</td><td>Injection</td><td>8.0</td></tr>
+                                <tr><td>21</td><td>Diazepam</td><td>Tablet</td><td>2.0</td></tr>
+                                <tr><td>22</td><td>Loratadine</td><td>Tablet</td><td>1.5</td></tr>
+                                <tr><td>23</td><td>Cetirizine</td><td>Tablet</td><td>1.5</td></tr>
+                                <tr><td>24</td><td>Hydrocortisone cream</td><td>Cream</td><td>2.5</td></tr>
+                                <tr><td>25</td><td>Betadine solution</td><td>Solution</td><td>2.0</td></tr>
+                                <tr><td>26</td><td>Saline solution (0.9%)</td><td>Solution</td><td>1.0</td></tr>
+                                <tr><td>27</td><td>Paracetamol suspension</td><td>Syrup</td><td>2.0</td></tr>
+                                <tr><td>28</td><td>Oral rehydration salts</td><td>Powder</td><td>1.0</td></tr>
+                                <tr><td>29</td><td>Multivitamins</td><td>Tablet</td><td>3.0</td></tr>
+                                <tr><td>30</td><td>Zinc tablets</td><td>Tablet</td><td>1.2</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+            </div>
+        </section>
+
+        <!-- Emergency -->
+        <section id="emergency" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Emergency Contacts</h2>
+                <p class="text-muted">24/7 emergency hotline numbers</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Emergency Services</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Service</th><th>Contact Number</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Ambulance</td><td>+1-202-555-0145</td></tr>
+                                <tr><td>Fire</td><td>+1-202-555-0172</td></tr>
+                                <tr><td>Police</td><td>+1-202-555-0198</td></tr>
+                                <tr><td>Medical Helpline</td><td>+1-202-555-0111</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+            </div>
+        </section>
+
+        <!-- Connected Hospitals -->
+        <section id="transfer" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Connected Hospitals</h2>
+                <p class="text-muted">View Domestic & International transfer options</p>
+            </div>
+            
+            <!-- Domestic Hospitals -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Domestic Hospitals</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Hospital Name</th><th>Location</th><th>Specialties</th><th>Contact</th><th>Available Beds</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Square Hospital</td><td>Dhaka</td><td>Cardiology, Neurology, Oncology</td><td>+880-2-8159457</td><td>25</td></tr>
+                                <tr><td>United Hospital</td><td>Gulshan, Dhaka</td><td>Orthopedics, Pediatrics, Surgery</td><td>+880-2-8836000</td><td>8</td></tr>
+                                <tr><td>LabAID Hospital</td><td>Dhanmondi, Dhaka</td><td>General Medicine, Gastro, Nephrology</td><td>+880-2-8616320</td><td>18</td></tr>
+                                <tr><td>Apollo Hospital</td><td>Bashundhara, Dhaka</td><td>Cardiology, Cancer Care, Neurosurgery</td><td>+880-2-8401661</td><td>32</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- International Hospitals -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">International Hospitals</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Country</th><th>Hospital Name</th><th>Specialties</th><th>Cost Estimate (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>India</td><td>Apollo Hospital, Chennai</td><td>Cardiology, Oncology, Organ Transplant</td><td>$15,000 - $50,000</td></tr>
+                                <tr><td>Singapore</td><td>Mount Elizabeth Hospital</td><td>Cancer Care, Neurosurgery, Orthopedics</td><td>$25,000 - $80,000</td></tr>
+                                <tr><td>Thailand</td><td>Bumrungrad Hospital, Bangkok</td><td>Heart Surgery, Cosmetic, Fertility</td><td>$10,000 - $40,000</td></tr>
+                                <tr><td>USA</td><td>Johns Hopkins Hospital</td><td>Advanced Cancer, Neurology, Research</td><td>$50,000 - $200,000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+            </div>
+        </section>
+
+        <!-- Billing -->
+          <!-- Billing -->
+<section id="billing" class="app-section">
+    <div class="mb-4">
+        <h2 class="fw-bold mb-3" style="margin-top:40px;">Billing</h2>
+        <p class="text-muted">Transparent billing and payment information</p>
+    </div>
+    
+    <!-- Billing Login Panel -->
+    <div id="billingLoginPanel" class="card shadow-sm mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Billing System Login</h5>
+        </div>
+        <div class="card-body">
+            <form id="billingLoginForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="billingUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="billingUsername" placeholder="Enter any username" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="billingPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="billingPassword" placeholder="Enter any password" required>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Access Billing Records</button>
+                </div>
+                <div class="text-center mt-2">
+                    <small class="text-muted">Note: Any username and password will work for demo purposes</small>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Billing Records (Initially Hidden) -->
+    <div id="billingRecords" style="display: none;">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Billing Records</h5>
+                <button class="btn btn-sm btn-outline-light" onclick="logoutBilling()">Logout</button>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Bill ID</th>
+                                <th>Patient Name</th>
+                                <th>Service</th>
+                                <th>Amount (USD)</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>B101</td><td>John Miller</td><td>Cardiology</td><td>5000</td><td>12/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                            <tr><td>B102</td><td>Imran Hossain</td><td>Orthopedics</td><td>3200</td><td>13/11/2025</td><td><span class="badge bg-warning">Pending</span></td></tr>
+                            <tr><td>B103</td><td>Michael Smith</td><td>Neurology</td><td>4500</td><td>14/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                            <tr><td>B104</td><td>Fatema Akter</td><td>Pediatrics</td><td>2800</td><td>15/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                            <tr><td>B105</td><td>David Johnson</td><td>General Surgery</td><td>6000</td><td>15/11/2025</td><td><span class="badge bg-danger">Overdue</span></td></tr>
+                            <tr><td>B106</td><td>Sadia Karim</td><td>Oncology</td><td>7200</td><td>16/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                            <tr><td>B107</td><td>James Wilson</td><td>ENT</td><td>3100</td><td>16/11/2025</td><td><span class="badge bg-warning">Pending</span></td></tr>
+                            <tr><td>B108</td><td>Sarah Johnson</td><td>Dermatology</td><td>1500</td><td>17/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                            <tr><td>B109</td><td>Robert Brown</td><td>Cardiac Surgery</td><td>12000</td><td>18/11/2025</td><td><span class="badge bg-warning">Pending</span></td></tr>
+                            <tr><td>B110</td><td>Lisa Anderson</td><td>Maternity Care</td><td>3800</td><td>19/11/2025</td><td><span class="badge bg-success">Paid</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Billing Summary -->
+        
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+    </div>
+</section>
+
+        <!-- Info of Staffs -->
+        <section id="staffs" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Hospital Staffs</h2>
+                <p class="text-muted">Hospital staff directory and contact information</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Staff Directory</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>ID</th><th>Name</th><th>Position</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>S101</td><td>Rafiq Ahmed</td><td>Nurse</td></tr>
+                                <tr><td>S102</td><td>Shamima Akter</td><td>Nurse</td></tr>
+                                <tr><td>S103</td><td>Jahidul Islam</td><td>Nurse</td></tr>
+                                <tr><td>S104</td><td>Sabina Hossain</td><td>Nurse</td></tr>
+                                <tr><td>S105</td><td>Tanvir Rahman</td><td>Nurse</td></tr>
+                                <tr><td>S106</td><td>Nasrin Sultana</td><td>Nurse</td></tr>
+                                <tr><td>S107</td><td>Imran Karim</td><td>Nurse</td></tr>
+                                <tr><td>S108</td><td>Farzana Khatun</td><td>Nurse</td></tr>
+                                <tr><td>S109</td><td>Mahmudul Hasan</td><td>Nurse</td></tr>
+                                <tr><td>S110</td><td>Rumana Begum</td><td>Nurse</td></tr>
+                                <tr><td>S111</td><td>Fahim Ahmed</td><td>Nurse</td></tr>
+                                <tr><td>S112</td><td>Shirin Akter</td><td>Nurse</td></tr>
+                                <tr><td>S113</td><td>Tasnim Nahar</td><td>Nurse</td></tr>
+                                <tr><td>S114</td><td>Rakibul Islam</td><td>Nurse</td></tr>
+                                <tr><td>S115</td><td>Sumaiya Rahman</td><td>Nurse</td></tr>
+                                <tr><td>S201</td><td>Shakil Ahmed</td><td>Receptionist</td></tr>
+                                <tr><td>S202</td><td>Morsheda Begum</td><td>Receptionist</td></tr>
+                                <tr><td>S203</td><td>Nayeem Hasan</td><td>Receptionist</td></tr>
+                                <tr><td>S204</td><td>Rokeya Akter</td><td>Receptionist</td></tr>
+                                <tr><td>S205</td><td>Tariq Rahman</td><td>Receptionist</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('hospital')">Back to Hospital Services</button>
+            </div>
+        </section>
+
+        <!-- Diagnostic Services -->
+        <section id="diagnostic" class="app-section">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3" style="margin-top:40px;">Diagnostic Services</h2>
+                <p class="lead text-muted">Complete diagnostic and testing services</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-blood')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-droplet-fill fs-3 text-danger"></i>
+                            </div>
+                            <h5 class="card-title">Blood Test</h5>
+                            <p class="card-text text-muted small">Complete blood count and analysis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-urine')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-moisture fs-3 text-warning"></i>
+                            </div>
+                            <h5 class="card-title">Urine Test</h5>
+                            <p class="card-text text-muted small">Urinalysis and culture services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-xray')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-lungs fs-3 text-info"></i>
+                            </div>
+                            <h5 class="card-title">X-Ray</h5>
+                            <p class="card-text text-muted small">Digital X-ray imaging services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-ecg')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-activity fs-3 text-success"></i>
+                            </div>
+                            <h5 class="card-title">ECG / ECHO</h5>
+                            <p class="card-text text-muted small">Cardiac electrical and echo imaging</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-ultrasound')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-camera-video fs-3 text-primary"></i>
+                            </div>
+                            <h5 class="card-title">Ultrasound</h5>
+                            <p class="card-text text-muted small">Abdominal and obstetric ultrasounds</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('diag-packages')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-secondary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i class="bi bi-file-earmark-medical fs-3 text-secondary"></i>
+                            </div>
+                            <h5 class="card-title">Health Packages</h5>
+                            <p class="card-text text-muted small">Comprehensive health checkup packages</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('services')">Back to Services</button>
+            </div>
+        </section>
+
+        <!-- Blood Test -->
+        <section id="diag-blood" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Blood Test</h2>
+                <p class="text-muted">Common blood tests we provide (fasting / sample requirements vary by test)</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Available Blood Tests</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Test</th><th>Includes</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Complete Blood Count (CBC)</td><td>RBC, WBC, Hemoglobin, Platelets</td><td>10 - 20</td></tr>
+                                <tr><td>Blood Sugar (Fasting & Random)</td><td>Glucose level check</td><td>8 - 15</td></tr>
+                                <tr><td>Lipid Profile</td><td>Cholesterol, HDL, LDL, Triglycerides</td><td>25 - 45</td></tr>
+                                <tr><td>Liver Function Test (LFT)</td><td>ALT, AST, Bilirubin</td><td>20 - 35</td></tr>
+                                <tr><td>Kidney Function Test (KFT)</td><td>Creatinine, Urea, Electrolytes</td><td>15 - 30</td></tr>
+                                <tr><td>Thyroid Function Test (TFT)</td><td>TSH, T3, T4</td><td>18 - 35</td></tr>
+                                <tr><td>Vitamin D Test</td><td>Vitamin D levels in blood</td><td>20 - 40</td></tr>
+                                <tr><td>Iron Studies</td><td>Serum Iron, TIBC, Ferritin</td><td>15 - 25</td></tr>
+                                <tr><td>Coagulation Profile</td><td>PT, INR, aPTT</td><td>12 - 25</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+
+        <!-- Urine Test -->
+        <section id="diag-urine" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;" >Urine Test</h2>
+                <p class="text-muted">Urinalysis & urine culture services</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Available Urine Tests</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Test</th><th>What it checks</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Urinalysis</td><td>Protein, Glucose, pH, Ketones, Microscopy</td><td>6 - 12</td></tr>
+                                <tr><td>Urine Culture</td><td>Detects urinary infections & sensitivity</td><td>20 - 35</td></tr>
+                                <tr><td>Microscopic Urine Examination</td><td>Cells, Crystals, Casts, Bacteria</td><td>8 - 15</td></tr>
+                                <tr><td>Urine Protein Test</td><td>Protein levels to check kidney function</td><td>10 - 18</td></tr>
+                                <tr><td>Urine Sugar Test</td><td>Detects glucose for diabetes screening</td><td>5 - 10</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+
+        <!-- X-Ray -->
+        <section id="diag-xray" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">X-Ray</h2>
+                <p class="text-muted">Digital X-Ray imaging (chest, limbs, spine, etc.)</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">X-Ray Services</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Type</th><th>Usage</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Chest X-Ray</td><td>Respiratory & cardiac screening</td><td>20 - 35</td></tr>
+                                <tr><td>Extremity X-Ray</td><td>Bone fractures, alignment</td><td>15 - 30</td></tr>
+                                <tr><td>Spine X-Ray</td><td>Vertebral alignment, back pain diagnosis</td><td>25 - 40</td></tr>
+                                <tr><td>Pelvis X-Ray</td><td>Hip & pelvic bone evaluation</td><td>20 - 35</td></tr>
+                                <tr><td>Skull X-Ray</td><td>Head injuries, sinus checks</td><td>20 - 35</td></tr>
+                                <tr><td>Abdomen X-Ray</td><td>Intestinal obstruction, kidney stones</td><td>25 - 40</td></tr>
+                                <tr><td>Shoulder X-Ray</td><td>Dislocations, fractures</td><td>15 - 30</td></tr>
+                                <tr><td>Knee X-Ray</td><td>Joint injuries, arthritis</td><td>15 - 30</td></tr>
+                                <tr><td>Hand & Wrist X-Ray</td><td>Fractures, growth plate evaluation</td><td>15 - 25</td></tr>
+                                <tr><td>Foot & Ankle X-Ray</td><td>Sprains, fractures</td><td>15 - 25</td></tr>
+                                <tr><td>Dental X-Ray</td><td>Teeth & jaw assessment</td><td>20 - 35</td></tr>
+                                <tr><td>Chest PA & Lateral X-Ray</td><td>Detailed chest imaging</td><td>30 - 45</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+
+        <!-- ECG / ECHO -->
+        <section id="diag-ecg" class="app-section">
+            <div class="mb-4" style="margin-top:40px;">
+                <h2 class="fw-bold mb-3" >ECG / ECHO</h2>
+                <p class="text-muted">Cardiac electrical & echo imaging services</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Cardiac Tests</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Test</th><th>Purpose</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>ECG</td><td>Detects heart rhythm & electrical issues</td><td>10 - 20</td></tr>
+                                <tr><td>Echocardiography (ECHO)</td><td>Heart structure & function</td><td>50 - 90</td></tr>
+                                <tr><td>Stress Test / Treadmill Test</td><td>Assesses heart response to exercise</td><td>40 - 70</td></tr>
+                                <tr><td>Holter Monitoring</td><td>Continuous 24-48h ECG monitoring</td><td>60 - 100</td></tr>
+                                <tr><td>Cardiac CT Scan</td><td>Detailed imaging of coronary arteries</td><td>120 - 200</td></tr>
+                                <tr><td>Cardiac MRI</td><td>Heart structure & tissue evaluation</td><td>150 - 250</td></tr>
+                                <tr><td>Electrophysiology Study (EPS)</td><td>Detects electrical conduction issues</td><td>200 - 350</td></tr>
+                                <tr><td>Coronary Angiography</td><td>Visualizes coronary arteries</td><td>250 - 400</td></tr>
+                                <tr><td>Pacemaker / ICD Check</td><td>Monitors implanted device function</td><td>50 - 100</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+
+        <!-- Ultrasound -->
+        <section id="diag-ultrasound" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Ultrasound</h2>
+                <p class="text-muted">Abdominal, pelvic, obstetric, and targeted ultrasounds</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Ultrasound Services</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>Type</th><th>Usage</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Abdominal Ultrasound</td><td>Liver, kidneys, gallbladder, pancreas</td><td>40 - 70</td></tr>
+                                <tr><td>Obstetric Ultrasound</td><td>Pregnancy monitoring</td><td>35 - 65</td></tr>
+                                <tr><td>Pelvic Ultrasound</td><td>Uterus, ovaries, bladder</td><td>35 - 60</td></tr>
+                                <tr><td>Thyroid Ultrasound</td><td>Thyroid gland evaluation</td><td>30 - 50</td></tr>
+                                <tr><td>Breast Ultrasound</td><td>Breast lump evaluation</td><td>35 - 60</td></tr>
+                                <tr><td>Renal / Kidney Ultrasound</td><td>Kidney stones, obstruction</td><td>35 - 55</td></tr>
+                                <tr><td>Prostate Ultrasound</td><td>Prostate size & abnormalities</td><td>40 - 65</td></tr>
+                                <tr><td>Scrotal Ultrasound</td><td>Testicular & scrotal evaluation</td><td>35 - 55</td></tr>
+                                <tr><td>Carotid Doppler</td><td>Blood flow in neck arteries</td><td>50 - 80</td></tr>
+                                <tr><td>Lower Limb Doppler</td><td>Detects vein thrombosis or blockage</td><td>45 - 75</td></tr>
+                                <tr><td>Abdominal Doppler</td><td>Blood flow in abdominal vessels</td><td>50 - 85</td></tr>
+                                <tr><td>Fetal Doppler</td><td>Monitors fetal heartbeat during pregnancy</td><td>30 - 50</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+
+        <!-- Health Packages -->
+        <section id="diag-packages" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Health Packages</h2>
+                <p class="text-muted">Comprehensive health checkup packages with multiple tests</p>
+            </div>
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Available Health Packages</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr><th>No.</th><th>Package Name</th><th>Includes</th><th>Approx. Cost (USD)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Basic Health Check-up</td>
+                                    <td>CBC, Blood Sugar, Urine Test, Blood Pressure, BMI</td>
+                                    <td>50 - 70</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Standard Health Check-up</td>
+                                    <td>CBC, Lipid Profile, LFT, KFT, ECG</td>
+                                    <td>100 - 150</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Comprehensive Health Check-up</td>
+                                    <td>CBC, LFT, KFT, ECG, X-Ray, Ultrasound, Thyroid</td>
+                                    <td>200 - 250</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Senior Citizen Package</td>
+                                    <td>Diabetes panel, ECG, Vision screening, Bone density</td>
+                                    <td>130 - 180</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Cardiac Health Package</td>
+                                    <td>ECG, ECHO, Lipid Profile, Stress Test, Blood Pressure</td>
+                                    <td>150 - 220</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Diabetes Care Package</td>
+                                    <td>Fasting Blood Sugar, HbA1c, Kidney Function, Eye Check</td>
+                                    <td>80 - 120</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Women's Health Package</td>
+                                    <td>CBC, Thyroid, Pap Smear, Ultrasound (Pelvic/Abdominal)</td>
+                                    <td>100 - 160</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Men's Health Package</td>
+                                    <td>CBC, PSA, Lipid Profile, Liver & Kidney Function</td>
+                                    <td>90 - 150</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Pre-Employment Package</td>
+                                    <td>CBC, Urine Test, Chest X-Ray, Hepatitis B, HIV Screening</td>
+                                    <td>60 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Full Body Check-up</td>
+                                    <td>CBC, LFT, KFT, ECG, X-Ray, Ultrasound, Lipid Profile, Thyroid, Vitamin D</td>
+                                    <td>250 - 350</td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td>Pediatric Health Package</td>
+                                    <td>CBC, Urine Test, Growth Assessment, Vaccination Review</td>
+                                    <td>50 - 90</td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td>Kidney Care Package</td>
+                                    <td>Kidney Function, Urine Test, Ultrasound Kidney, Blood Pressure Check</td>
+                                    <td>90 - 140</td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td>Liver Care Package</td>
+                                    <td>LFT, Ultrasound Abdomen, CBC, Viral Hepatitis Screening</td>
+                                    <td>100 - 160</td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td>Bone Health Package</td>
+                                    <td>Calcium, Vitamin D, Bone Density Test, CBC</td>
+                                    <td>80 - 140</td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td>Thyroid Package</td>
+                                    <td>TSH, T3, T4, CBC, Lipid Profile</td>
+                                    <td>70 - 120</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Obesity Management Package</td>
+                                    <td>BMI, Lipid Profile, Blood Sugar, Liver & Kidney Function</td>
+                                    <td>80 - 130</td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td>Hypertension Care Package</td>
+                                    <td>Blood Pressure, Kidney Function, ECG, Lipid Profile</td>
+                                    <td>70 - 120</td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td>Pre-Marriage Health Package</td>
+                                    <td>CBC, Blood Sugar, Urine Test, Hepatitis, HIV Screening</td>
+                                    <td>60 - 100</td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td>Executive Health Package</td>
+                                    <td>Full Body Check-up, ECG, X-Ray, Ultrasound, Vitamin D, Thyroid</td>
+                                    <td>200 - 300</td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td>Advanced Wellness Package</td>
+                                    <td>All major blood tests, ECG, ECHO, X-Ray, Ultrasound, Vitamin D, Thyroid</td>
+                                    <td>300 - 400</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-outline-secondary" onclick="openSection('diagnostic')">Back to Diagnostic Services</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+    function hideAll() {
+      document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active'));
+    }
+    function openSection(id) {
+      hideAll();
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      // Services section is active by default
+    });
+  </script>
+
+  
+  <script>
+    function hideAll() {
+      document.querySelectorAll('.app-section').forEach(s => s.classList.remove('active'));
+    }
+    function openSection(id) {
+      hideAll();
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Billing Login Functionality - ADD THESE NEW FUNCTIONS
+    let isBillingLoggedIn = false;
+
+    function handleBillingLogin(event) {
+        event.preventDefault();
+        
+        // Get input values
+        const username = document.getElementById('billingUsername').value;
+        const password = document.getElementById('billingPassword').value;
+        
+        // For demo purposes, any username/password combination will work
+        if (username && password) {
+            isBillingLoggedIn = true;
+            
+            // Hide login panel and show billing records
+            document.getElementById('billingLoginPanel').style.display = 'none';
+            document.getElementById('billingRecords').style.display = 'block';
+            
+            // Show success message
+            alert('Login successful! Welcome to Billing System.');
+        }
+    }
+
+    function logoutBilling() {
+        isBillingLoggedIn = false;
+        
+        // Show login panel and hide billing records
+        document.getElementById('billingLoginPanel').style.display = 'block';
+        document.getElementById('billingRecords').style.display = 'none';
+        
+        // Clear form fields
+        document.getElementById('billingLoginForm').reset();
+        
+        alert('Logged out successfully.');
+    }
+
+    function openBilling() {
+        openSection('billing');
+        // Reset to login panel when opening billing section
+        if (!isBillingLoggedIn) {
+            document.getElementById('billingLoginPanel').style.display = 'block';
+            document.getElementById('billingRecords').style.display = 'none';
+            document.getElementById('billingLoginForm').reset();
+        } else {
+            document.getElementById('billingLoginPanel').style.display = 'none';
+            document.getElementById('billingRecords').style.display = 'block';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Services section is active by default
+      
+      // Add event listener for billing login form
+      const billingLoginForm = document.getElementById('billingLoginForm');
+      if (billingLoginForm) {
+          billingLoginForm.addEventListener('submit', handleBillingLogin);
+      }
+    });
+</script>
+</body>
+</html>

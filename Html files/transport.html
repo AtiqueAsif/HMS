@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Services - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .app-section {
+            display: none;
+        }
+        .app-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Transport Service Categories -->
+        <section id="transport-main" class="app-section active">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold" style="margin-top:40px;">Transport Services</h1>
+                <p class="lead text-muted">Comprehensive patient, medical supply, and doctor transport management</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('patient-transfer')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-person-wheelchair fs-1 text-primary"></i>
+                            </div>
+                            <h3 class="card-title fw-bold" style="margin-top:40px;">Patient Transfer</h3>
+                            <p class="card-text text-muted">Local and international patient transfer services</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('supply-transport')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-box-seam fs-1 text-success"></i>
+                            </div>
+                            <h3 class="card-title fw-bold" style="margin-top:40px;">Medical Supply Transport</h3>
+                            <p class="card-text text-muted">Equipment, medicines, blood, and organ transport</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('doctor-transport')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="bi bi-person-badge fs-1 text-info"></i>
+                            </div>
+                            <h3 class="card-title fw-bold" style="margin-top:40px;">Doctor Transport</h3>
+                            <p class="card-text text-muted">Quick doctor movement between departments and hospitals</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="index.html" class="btn btn-outline-primary">Back to Home</a>
+            </div>
+        </section>
+
+        <!-- Patient Transfer Section -->
+        <section id="patient-transfer" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Patient Transfer Services</h2>
+                <p class="text-muted">Manage local and international patient transfer operations</p>
+            </div>
+
+            <div class="row g-4 mb-4" >
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('local-transfer')">
+                        <div class="card-body text-center p-4"  >
+                            <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;" >
+                                <i class="bi bi-hospital fs-2 text-primary" ></i>
+                            </div>
+                            <h4 class="card-title fw-bold" style="margin-top:40px;">Local Hospital Transfer</h4>
+                            <p class="card-text text-muted">Transfer patients to local hospitals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0" style="cursor: pointer;" onclick="openSection('foreign-transfer')">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="bi bi-globe fs-2 text-success"></i>
+                            </div>
+                            <h4 class="card-title fw-bold" style="margin-top:40px;">Foreign Transfer</h4>
+                            <p class="card-text text-muted">International patient transfer services</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('transport-main')">Back to Transport Services</button>
+            </div>
+        </section>
+
+        <!-- Local Hospital Transfer -->
+        <section id="local-transfer" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3">Local Hospital Transfer</h2>
+                <p class="text-muted">Transfer patients to local hospitals within the region</p>
+            </div>
+
+            <!-- Hospital List -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-hospital me-2"></i>Available Hospitals</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Hospital Name</th>
+                                    <th>Location</th>
+                                    <th>Specialties</th>
+                                    <th>Contact</th>
+                                    <th>Available Beds</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Square Hospital</strong></td>
+                                    <td>Dhaka</td>
+                                    <td>Cardiology, Neurology, Oncology</td>
+                                    <td>+880-2-8159457</td>
+                                    <td><span class="badge bg-success">25</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>United Hospital</strong></td>
+                                    <td>Gulshan, Dhaka</td>
+                                    <td>Orthopedics, Pediatrics, Surgery</td>
+                                    <td>+880-2-8836000</td>
+                                    <td><span class="badge bg-warning">8</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>LabAID Hospital</strong></td>
+                                    <td>Dhanmondi, Dhaka</td>
+                                    <td>General Medicine, Gastro, Nephrology</td>
+                                    <td>+880-2-8616320</td>
+                                    <td><span class="badge bg-success">18</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Apollo Hospital</strong></td>
+                                    <td>Bashundhara, Dhaka</td>
+                                    <td>Cardiology, Cancer Care, Neurosurgery</td>
+                                    <td>+880-2-8401661</td>
+                                    <td><span class="badge bg-success">32</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transfer Request Form -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-clipboard-check me-2"></i>Transfer Request</h5>
+                </div>
+                <div class="card-body">
+                    <form id="localTransferForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Patient ID</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Patient Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Required Specialty</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Specialty</option>
+                                    <option>Cardiology</option>
+                                    <option>Neurology</option>
+                                    <option>Oncology</option>
+                                    <option>Orthopedics</option>
+                                    <option>Pediatrics</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Preferred Hospital</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Hospital</option>
+                                    <option>Square Hospital</option>
+                                    <option>United Hospital</option>
+                                    <option>LabAID Hospital</option>
+                                    <option>Apollo Hospital</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Priority</option>
+                                    <option>Emergency</option>
+                                    <option>Urgent</option>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Transfer Date & Time</label>
+                                <input type="datetime-local" class="form-control" required>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Reason for Transfer</label>
+                                <textarea class="form-control" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Submit Transfer Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Approval Process -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-check2-circle me-2"></i>Approval Process</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="text-center p-3 border rounded">
+                                <i class="bi bi-person-check fs-1 text-primary mb-2"></i>
+                                <h6 class="fw-bold" style="margin-top:40px;">Step 1: Doctor Approval</h6>
+                                <p class="text-muted small mb-0">Attending doctor reviews and approves transfer</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3 border rounded">
+                                <i class="bi bi-shield-check fs-1 text-success mb-2"></i>
+                                <h6 class="fw-bold" style="margin-top:40px;">Step 2: Admin Verification</h6>
+                                <p class="text-muted small mb-0">Hospital admin verifies patient records</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="text-center p-3 border rounded">
+                                <i class="bi bi-hospital fs-1 text-info mb-2"></i>
+                                <h6 class="fw-bold" style="margin-top:40px;">Step 3: Bed Confirmation</h6>
+                                <p class="text-muted small mb-0">Receiving hospital confirms bed availability</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transfer Execution -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-truck me-2"></i>Transfer Execution</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Ambulance Assignment</label>
+                            <select class="form-select">
+                                <option>Ambulance #AMB-001 (Available)</option>
+                                <option>Ambulance #AMB-002 (Available)</option>
+                                <option>Ambulance #AMB-003 (On Route)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Medical Team Assignment</label>
+                            <select class="form-select">
+                                <option>Team A - Dr. Rahman + 2 Nurses</option>
+                                <option>Team B - Dr. Khan + 2 Nurses</option>
+                                <option>Team C - Dr. Ahmed + 2 Nurses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="alert alert-info mb-0">
+                        <h6 class="fw-bold" style="margin-top:40px;">Live Transfer Status</h6>
+                        <div class="progress mb-2" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;">In Transit - 75%</div>
+                        </div>
+                        <p class="mb-0 small"><strong>Current Status:</strong> Ambulance dispatched → Patient loaded → In Transit → Arriving at destination</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('patient-transfer')">Back to Patient Transfer</button>
+            </div>
+        </section>
+
+        <!-- Foreign Transfer -->
+        <section id="foreign-transfer" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Foreign Transfer</h2>
+                <p class="text-muted">International patient transfer services with visa assistance</p>
+            </div>
+
+            <!-- Foreign Hospital List -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-globe me-2"></i>Foreign Hospital List</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>Hospital Name</th>
+                                    <th>Specialties</th>
+                                    <th>Cost Estimate (USD)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="bi bi-flag me-1"></i><strong>India</strong></td>
+                                    <td>Apollo Hospital, Chennai</td>
+                                    <td>Cardiology, Oncology, Organ Transplant</td>
+                                    <td>$15,000 - $50,000</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-flag me-1"></i><strong>Singapore</strong></td>
+                                    <td>Mount Elizabeth Hospital</td>
+                                    <td>Cancer Care, Neurosurgery, Orthopedics</td>
+                                    <td>$25,000 - $80,000</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-flag me-1"></i><strong>Thailand</strong></td>
+                                    <td>Bumrungrad Hospital, Bangkok</td>
+                                    <td>Heart Surgery, Cosmetic, Fertility</td>
+                                    <td>$10,000 - $40,000</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="bi bi-flag me-1"></i><strong>USA</strong></td>
+                                    <td>Johns Hopkins Hospital</td>
+                                    <td>Advanced Cancer, Neurology, Research</td>
+                                    <td>$50,000 - $200,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Document Submission -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-file-earmark-text me-2"></i>Document Submission</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Passport Copy</label>
+                                <input type="file" class="form-control" accept=".pdf,.jpg,.png" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Medical Reports</label>
+                                <input type="file" class="form-control" accept=".pdf" multiple required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Doctor's Recommendation Letter</label>
+                                <input type="file" class="form-control" accept=".pdf" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Patient Photos (Passport Size)</label>
+                                <input type="file" class="form-control" accept=".jpg,.png" multiple required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Upload Documents</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Medical Visa Application -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-card-checklist me-2"></i>Medical Visa Application</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Destination Country</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Country</option>
+                                    <option>India</option>
+                                    <option>Singapore</option>
+                                    <option>Thailand</option>
+                                    <option>USA</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Visa Type</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Type</option>
+                                    <option>Medical Visa</option>
+                                    <option>Medical Attendant Visa</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Expected Travel Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Duration of Stay (days)</label>
+                                <input type="number" class="form-control" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-warning mt-3">Submit Visa Application</button>
+                    </form>
+                    <div class="alert alert-info mt-3 mb-0">
+                        <h6 class="fw-bold" style="margin-top:40px;">Application Status Tracking</h6>
+                        <p class="mb-0"><strong>Current Status:</strong> Application Submitted → Under Review → Appointment Scheduled → Visa Approved</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Arrangement -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-airplane me-2"></i>Travel Arrangement</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Travel Mode</label>
+                            <select class="form-select">
+                                <option>Air Ambulance</option>
+                                <option>Commercial Flight (Business Class)</option>
+                                <option>Commercial Flight (Economy Class)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Medical Escort</label>
+                            <select class="form-select">
+                                <option>Doctor + Nurse</option>
+                                <option>Nurse Only</option>
+                                <option>Paramedic</option>
+                                <option>No Escort Required</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="border rounded p-3">
+                                <h6 class="fw-bold" style="margin-top:40px;">Travel Details</h6>
+                                <p class="mb-1"><strong>Flight:</strong> TBD (Will be updated after booking)</p>
+                                <p class="mb-1"><strong>Departure:</strong> Hazrat Shahjalal International Airport, Dhaka</p>
+                                <p class="mb-1"><strong>Arrival:</strong> TBD based on destination hospital</p>
+                                <p class="mb-0"><strong>Medical Escort:</strong> Assigned team will accompany patient</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-info mt-3">Confirm Travel Arrangement</button>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('patient-transfer')">Back to Patient Transfer</button>
+            </div>
+        </section>
+
+        <!-- Medical Supply Transport -->
+        <section id="supply-transport" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Medical Supply Transport</h2>
+                <p class="text-muted">Movement of equipment, medicines, blood, and organs</p>
+            </div>
+
+            <!-- Create Transfer Request -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-clipboard-plus me-2"></i>Create Transfer Request</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Item Type</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Type</option>
+                                    <option>Medical Equipment</option>
+                                    <option>Medicine</option>
+                                    <option>Blood/Plasma</option>
+                                    <option>Organ for Transplant</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Item Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">From Location</label>
+                                <select class="form-select" required>
+                                    <option>Main Hospital - Dhaka</option>
+                                    <option>Branch Hospital - Chattogram</option>
+                                    <option>Medical Warehouse - Dhaka</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">To Location</label>
+                                <select class="form-select" required>
+                                    <option>Main Hospital - Dhaka</option>
+                                    <option>Branch Hospital - Chattogram</option>
+                                    <option>External Hospital</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Quantity</label>
+                                <input type="number" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Priority</label>
+                                <select class="form-select" required>
+                                    <option>Critical (Organ/Emergency)</option>
+                                    <option>Urgent</option>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Special Instructions</label>
+                                <textarea class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">Create Request</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Vehicle & Staff Assignment -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-truck me-2"></i>Vehicle & Staff Assignment</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Assign Vehicle</label>
+                            <select class="form-select">
+                                <option>Refrigerated Van #RV-001 (For Organs/Blood)</option>
+                                <option>Medical Transport #MT-001</option>
+                                <option>Courier Vehicle #CV-001</option>
+                                <option>Ambulance #AMB-004 (Emergency)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Assign Courier/Staff</label>
+                            <select class="form-select">
+                                <option>Medical Courier - Karim (Available)</option>
+                                <option>Medical Courier - Rahim (Available)</option>
+                                <option>Nurse Escort - Sarah (For Critical Items)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3">Assign & Dispatch</button>
+                </div>
+            </div>
+
+            <!-- Delivery Tracking -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-pin-map me-2"></i>Delivery Tracking</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Item</th>
+                                    <th>From → To</th>
+                                    <th>Status</th>
+                                    <th>ETA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#SUP-001</strong></td>
+                                    <td>Ventilator Machine</td>
+                                    <td>Main Hospital → Branch</td>
+                                    <td><span class="badge bg-success">Picked</span></td>
+                                    <td>30 mins</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#SUP-002</strong></td>
+                                    <td>Blood (O+ 5 units)</td>
+                                    <td>Blood Bank → Main Hospital</td>
+                                    <td><span class="badge bg-warning">In Transit</span></td>
+                                    <td>15 mins</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#SUP-003</strong></td>
+                                    <td>Heart (Organ Transplant)</td>
+                                    <td>External → Main Hospital</td>
+                                    <td><span class="badge bg-danger">Critical - In Transit</span></td>
+                                    <td>10 mins</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#SUP-004</strong></td>
+                                    <td>Medicine Box</td>
+                                    <td>Warehouse → Branch</td>
+                                    <td><span class="badge bg-info">Delivered</span></td>
+                                    <td>Completed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert alert-info mt-3 mb-0">
+                        <h6 class="fw-bold" style="margin-top:40px;">Real-Time Status Flow</h6>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success">Picked</span>
+                            <i class="bi bi-arrow-right"></i>
+                            <span class="badge bg-warning">In Transit</span>
+                            <i class="bi bi-arrow-right"></i>
+                            <span class="badge bg-info">Delivered</span>
+                            <i class="bi bi-arrow-right"></i>
+                            <span class="badge bg-dark">Received</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory Update -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-box-arrow-in-down me-2"></i>Inventory Auto Update</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-3">Inventory is automatically updated when items are picked up and delivered</p>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6 class="fw-bold text-danger" style="margin-top:40px;">Sending Location Stock</h6>
+                                <p class="mb-1"><strong>Before:</strong> 50 units</p>
+                                <p class="mb-1"><strong>Dispatched:</strong> -5 units</p>
+                                <p class="mb-0 text-danger"><strong>Updated Stock:</strong> 45 units</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded p-3">
+                                <h6 class="fw-bold text-success" style="margin-top:40px;">Receiving Location Stock</h6>
+                                <p class="mb-1"><strong>Before:</strong> 20 units</p>
+                                <p class="mb-1"><strong>Received:</strong> +5 units</p>
+                                <p class="mb-0 text-success"><strong>Updated Stock:</strong> 25 units</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('transport-main')">Back to Transport Services</button>
+            </div>
+        </section>
+
+        <!-- Doctor Transport -->
+        <section id="doctor-transport" class="app-section">
+            <div class="mb-4">
+                <h2 class="fw-bold mb-3" style="margin-top:40px;">Doctor Transport</h2>
+                <p class="text-muted">Quick movement of doctors between departments and hospitals</p>
+            </div>
+
+            <!-- Request Transfer -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-person-badge me-2"></i>Request Doctor Transfer</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Doctor ID</label>
+                                <input type="text" class="form-control" placeholder="e.g., DOC-1234" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Doctor Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Specialization</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Specialization</option>
+                                    <option>Cardiologist</option>
+                                    <option>Neurologist</option>
+                                    <option>Surgeon</option>
+                                    <option>Pediatrician</option>
+                                    <option>Emergency Medicine</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">From Location</label>
+                                <select class="form-select" required>
+                                    <option>Main Hospital - Cardiology Dept</option>
+                                    <option>Branch Hospital - Chattogram</option>
+                                    <option>Emergency Department</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">To Location</label>
+                                <select class="form-select" required>
+                                    <option>ICU Unit</option>
+                                    <option>Operation Theater</option>
+                                    <option>Branch Hospital - Sylhet</option>
+                                    <option>External Hospital (Emergency)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Urgency Level</label>
+                                <select class="form-select" required>
+                                    <option value="">Select Urgency</option>
+                                    <option>Critical Emergency</option>
+                                    <option>Urgent</option>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Reason for Transfer</label>
+                                <textarea class="form-control" rows="3" placeholder="e.g., Emergency surgery required, Patient consultation needed" required></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info mt-3">Request Transfer</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Transport Assignment -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-car-front me-2"></i>Transport Assignment</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Vehicle Type</label>
+                            <select class="form-select">
+                                <option>Hospital Car #HC-001 (Available)</option>
+                                <option>Hospital Car #HC-002 (Available)</option>
+                                <option>Ambulance #AMB-005 (Emergency Use)</option>
+                                <option>Private Cab (External)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Driver Assignment</label>
+                            <select class="form-select">
+                                <option>Driver - Hasan (Available)</option>
+                                <option>Driver - Kamal (Available)</option>
+                                <option>Driver - Rahim (On Route)</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <div class="alert alert-warning mb-0">
+                                <h6 class="fw-bold" style="margin-top:40px;">Vehicle Dispatch Info</h6>
+                                <p class="mb-1"><strong>Vehicle:</strong> Hospital Car #HC-001</p>
+                                <p class="mb-1"><strong>Driver:</strong> Hasan</p>
+                                <p class="mb-0"><strong>ETA to pickup location:</strong> 5 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3">Assign Vehicle & Dispatch</button>
+                </div>
+            </div>
+
+            <!-- Real-Time Status -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-geo-alt me-2"></i>Real-Time Status Tracking</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive mb-3">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Request ID</th>
+                                    <th>Doctor Name</th>
+                                    <th>From → To</th>
+                                    <th>Status</th>
+                                    <th>ETA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#DT-001</strong></td>
+                                    <td>Dr. Rahman (Cardiologist)</td>
+                                    <td>Main Hospital → ICU</td>
+                                    <td><span class="badge bg-warning">Dispatched</span></td>
+                                    <td>5 mins</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#DT-002</strong></td>
+                                    <td>Dr. Khan (Surgeon)</td>
+                                    <td>Emergency → OT</td>
+                                    <td><span class="badge bg-info">Arriving</span></td>
+                                    <td>2 mins</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#DT-003</strong></td>
+                                    <td>Dr. Ahmed (Neurologist)</td>
+                                    <td>Branch → Main Hospital</td>
+                                    <td><span class="badge bg-success">Reached</span></td>
+                                    <td>Completed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert alert-success mb-0">
+                        <h6 class="fw-bold" style="margin-top:40px;">Status Flow Tracker</h6>
+                        <div class="progress mb-2" style="height: 25px;">
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 33%;">Dispatched</div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 33%;">Arriving</div>
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 34%;">Reached</div>
+                        </div>
+                        <p class="mb-0 small"><strong>Current:</strong> Vehicle dispatched → Doctor picked up → Arriving at destination → Doctor reached</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-outline-secondary" onclick="openSection('transport-main')">Back to Transport Services</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading" style="margin-top:40px;">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading" style="margin-top:40px;">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading" style="margin-top:40px;">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading" style="margin-top:40px;">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        function openSection(sectionId) {
+            const sections = document.querySelectorAll('.app-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Handle form submissions
+        document.getElementById('localTransferForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Local transfer request submitted successfully!');
+        });
+    </script>
+</body>
+</html>

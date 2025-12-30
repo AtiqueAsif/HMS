@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Service card hover effects */
+        .service-card {
+            transition: all 0.3s ease;
+            border: 2px solid #0b1727 !important;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        .service-card .card-title {
+            transition: color 0.3s ease;
+        }
+        
+        .service-card:hover .card-title {
+            color: #0d6efd !important;
+        }
+        
+        .service-card .bi-arrow-right {
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .bi-arrow-right {
+            transform: translateX(5px);
+        }
+        
+        .service-card[href*="emergency"]:hover .card-title {
+            color: #dc3545 !important;
+        }
+        
+        .service-card[href*="patient"]:hover .card-title {
+            color: #198754 !important;
+        }
+        
+        .service-card[href*="tele"]:hover .card-title {
+            color: #0dcaf0 !important;
+        }
+        
+        .service-card[href*="report"]:hover .card-title {
+            color: #ffc107 !important;
+        }
+        
+        .service-card[href*="funding"]:hover .card-title {
+            color: #6c757d !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status Notification -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+        <div id="connectionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-wifi me-2" id="connectionIcon"></i>
+                <strong class="me-auto" id="connectionTitle">Checking Connection...</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body" id="connectionMessage">
+                Connecting to backend server...
+            </div>
+        </div>
+    </div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container-fluid d-flex align-items-center h-100 px-3">
+
+        <!-- Brand with extra left spacing -->
+        <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+            <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+            <span class="fw-bold">HMS</span>
+        </a>
+
+        <!-- Mobile toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar items -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                <li class="nav-item"><a class="nav-link" href="#specialities">Specialities</a></li>
+                <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency & Contact</a></li>
+            </ul>
+
+            <!-- Right links with extra right spacing -->
+            <ul class="navbar-nav ms-auto me-4">
+                <li class="nav-item"><a class="nav-link" href="Super_admin_panel/index.html">Super Admin</a></li>
+                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+
+    <!-- Hero Section -->
+    <section class="hero-section bg-white py-5">
+        <div class="hero-banner" role="img" aria-label="Healthcare professionals collage banner"></div>
+        <div class="container px-0">
+            <div class="row align-items-center g-5" style="min-height: 500px; margin: 0;">
+                <div class="col-lg-6 ps-0">
+                    <div class="text-start">
+                        <h1 class="display-4 fw-bold mb-2 text-dark">Your Health</h1>
+                        <h1 class="display-4 fw-bold mb-4 text-dark">Our Priority</h1>
+                        
+                        
+                        <div class="d-flex gap-4 flex-wrap justify-content-start">
+                            <a href="appointments.html" class="btn btn-primary btn-lg text-white" style="background-color: #0b1727; border-color: #0b1727;">Book Appointment</a>
+                            <a href="emergency.html" class="btn btn-primary btn-lg text-white" style="background-color: #0b1727; border-color: #0b1727;">
+                                <i class="bi bi-telephone-fill me-4"></i>Emergency
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3" style="line-height: 1.5;">Our Services</h2>
+                <p class="lead text-muted" style="font-weight:700; line-height: 1.5;">We provide comprehensive healthcare services to meet all your medical needs</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <a href="appointments.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-calendar-check fs-3 text-primary"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Appointment</h5>
+                                <p class="card-text text-muted">Schedule appointments with our expert doctors</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="tele-consultation.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-telephone fs-3 text-info"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Tele / Online Appointment</h5>
+                                <p class="card-text text-muted">Online consultations with our doctors</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="patient-portal-login.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-person-badge fs-3 text-success"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Patient Portal</h5>
+                                <p class="card-text text-muted">Access your medical records and reports</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="online-report.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-file-earmark-medical fs-3 text-warning"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Online Report</h5>
+                                <p class="card-text text-muted">View and download your medical reports online</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="funding.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-secondary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-cash-coin fs-3 text-secondary"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Funding</h5>
+                                <p class="card-text text-muted">Financial assistance for medical treatments</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="transport.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-truck fs-3 text-primary"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Transport Services</h5>
+                                <p class="card-text text-muted">Patient, medical supply, and doctor transport</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="pandemic.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-virus fs-3 text-warning"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Pandemic Info</h5>
+                                <p class="card-text text-muted">Pandemic emergency services and information</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="ai-support.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-dark bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-cpu fs-3 text-dark"></i>
+                                </div>
+                                <h5 class="card-title text-dark">AI Support</h5>
+                                <p class="card-text text-muted">Get answers from our AI assistant</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="services.html" class="text-decoration-none">
+                        <div class="card h-100 shadow border-2 service-card">
+                            <div class="card-body text-center p-4">
+                                <div class="service-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                    <i class="bi bi-hospital fs-3 text-primary"></i>
+                                </div>
+                                <h5 class="card-title text-dark">Hospital & Diagnostic Services</h5>
+                                <p class="card-text text-muted">Complete hospital and diagnostic services</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialities Section -->
+    <section id="specialities" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Our Specialities</h2>
+                <p class="lead text-muted "style="font-weight:700; line: height 4px;;">Innovative programs and technology-enabled care designed for every patient journey</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Multi-Hospital Network & Patient Transfer" data-description='<p class="text-muted">Connected hospitals, Super-admin coordination, Fast patient transfers</p><p class="text-muted">Connects multiple hospitals under a unified platform for efficient patient care and transfers.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>Connected Hospitals: Seamless sharing of patient data and real-time access to medical records across the network</li><li>Super-Admin Coordination: Centralized management for overseeing bed availability, staff allocation, and resources across all facilities</li><li>Fast Patient Transfers: Structured emergency protocols and real-time tracking for quick and safe transfers between hospitals</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Faster access to specialists, reduced waiting times, seamless record transfer, and improved overall outcomes</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-hospital text-primary"></i>
+                            </div>
+                            <h5 class="fw-semibold">Hospital Network & Patient Transfer</h5>
+                            <p class="text-muted mb-3">Connected hospitals, Super-admin coordination, Fast patient transfers</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• Connected hospitals</li>
+                                <li>• Super-admin coordination</li>
+                                <li>• Fast patient transfers</li>
+                            </ul>
+                            <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Patient Funding & NGO Support" data-description='<p class="text-muted">Financial help for patients, NGO approvals for treatment, Live funding status updates</p><p class="text-muted">Provides financial assistance to patients by connecting hospitals with NGOs and funding sources.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>Financial Help: Offers partial or full coverage for treatment costs based on eligibility criteria</li><li>NGO Approvals: Streamlines collaboration with NGOs for fast treatment authorization and funding</li><li>Live Funding Updates: Provides real-time transparency on the status of financial support applications</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Timely treatment without financial delays, reduced out-of-pocket expenses, and access to specialized care</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-cash-stack text-success"></i>
+                            </div>
+                            <h5 class="fw-semibold">Patient Funding & NGO Support</h5>
+                            <p class="text-muted mb-3">Financial help for patients, NGO approvals for treatment, Live funding status updates</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• Financial help</li>
+                                <li>• NGO approvals</li>
+                                <li>• Live funding status updates</li>
+                            </ul>
+                            <button class="btn btn-outline-success mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Telemedicine & 24/7 Virtual Care" data-description='<p class="text-muted">Online consultation, Video follow-up, Instant prescription</p><p class="text-muted">Enables remote medical consultations with doctors anytime, anywhere.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>Online Consultation: Secure video or chat platforms to connect with qualified doctors for real-time diagnoses</li><li>Video Follow-Up: Remote monitoring of patient progress after initial consultations</li><li>Instant Prescription: Digital delivery of prescriptions immediately after consultation</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Convenience without travel, quick access to specialists, reduced hospital visits, and faster medication access</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-laptop text-info"></i>
+                            </div>
+                            <h5 class="fw-semibold">Telemedicine & 24/7 Virtual Care</h5>
+                            <p class="text-muted mb-3">Online consultation, Video follow-up, Instant prescription</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• Online consultation</li>
+                                <li>• Video follow-up</li>
+                                <li>• Instant prescription</li>
+                            </ul>
+                            <button class="btn btn-outline-info mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Emergency Handling" data-description='<p class="text-muted">24/7 emergency response, Patient triage & management, Ambulance coordination</p><p class="text-muted">Ensures immediate and effective care during critical situations.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>24/7 Emergency Response: Continuous monitoring and quick mobilization of staff for immediate intervention</li><li>Patient Triage & Management: Prioritizes care based on severity and allocates hospital resources efficiently</li><li>Ambulance Coordination: Manages fleet deployment and GPS tracking for swift patient transport to the right facility</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Immediate medical attention, reduced risk of complications, and faster transfer to appropriate care</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-truck-flatbed text-danger"></i>
+                            </div>
+                            <h5 class="fw-semibold">Emergency Handling</h5>
+                            <p class="text-muted mb-3">24/7 emergency response, Patient triage & management, Ambulance coordination</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• 24/7 emergency response</li>
+                                <li>• Patient triage & management</li>
+                                <li>• Ambulance coordination</li>
+                            </ul>
+                            <button class="btn btn-outline-danger mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Smart Health Analytics" data-description='<p class="text-muted">AI-powered reports, Early detection, Risk monitoring</p><p class="text-muted">Uses AI and data analysis to improve patient outcomes and hospital operations.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>AI-Powered Reports: Automates data analysis to provide predictive insights and support evidence-based decisions</li><li>Early Detection: Uses algorithms to identify potential health risks before they escalate</li><li>Risk Monitoring: Enables real-time alerts and continuous tracking of patient risk profiles</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Timely intervention, preventive care opportunities, and proactive healthcare management</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-activity text-warning"></i>
+                            </div>
+                            <h5 class="fw-semibold">Smart Health Analytics</h5>
+                            <p class="text-muted mb-3">AI-powered reports, Early detection, Risk monitoring</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• AI-powered reports</li>
+                                <li>• Early detection</li>
+                                <li>• Risk monitoring</li>
+                            </ul>
+                            <button class="btn btn-outline-warning mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm border-0 speciality-card fade-up" data-title="Remote Patient Monitoring (RPM)" data-description='<p class="text-muted">Wearable tracking, Home monitoring, Real-time alerts</p><p class="text-muted">Tracks patient health remotely to provide continuous care at home.</p><h6 class="fw-semibold mt-3">Key Features:</h6><ul class="mb-0 ps-3 text-muted"><li>Wearable Tracking: Devices that measure vital signs (e.g., heart rate, blood pressure) and transmit data in real time</li><li>Home Monitoring: Allows doctors to review patient data remotely without requiring frequent hospital visits</li><li>Real-Time Alerts: Notifies doctors and caregivers immediately when patient readings deviate from the norm</li></ul><h6 class="fw-semibold mt-3">Patient Benefits:</h6><ul class="mb-0 ps-3 text-muted"><li>Continuous health monitoring, early detection of anomalies, and reduced unnecessary hospital visits. Ideal for chronic care management</li></ul>'>
+                        <div class="card-body d-flex flex-column text-center p-4">
+                            <div class="speciality-icon bg-secondary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3">
+                                <i class="bi bi-broadcast-pin text-secondary"></i>
+                            </div>
+                            <h5 class="fw-semibold">Remote Patient Monitoring (RPM)</h5>
+                            <p class="text-muted mb-3">Wearable tracking, Home monitoring, Real-time alerts</p>
+                            <ul class="list-unstyled text-muted small mb-0">
+                                <li>• Wearable tracking</li>
+                                <li>• Home monitoring</li>
+                                <li>• Real-time alerts</li>
+                            </ul>
+                            <button class="btn btn-outline-secondary mt-3" data-bs-toggle="modal" data-bs-target="#specialityModal" style="background-color: #0b1727; border-color: #0b1727; color: white;">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialities Modal -->
+    <div class="modal fade" id="specialityModal" tabindex="-1" aria-labelledby="specialityModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="specialityModalLabel">Speciality Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="specialityModalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-3">Why Choose Us</h2>
+               
+                 <p class="lead text-muted "style="font-weight:700; line: height 4px;;">We are committed to providing the highest quality healthcare services</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="feature-icon bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-clock-history fs-2 text-primary"></i>
+                        </div>
+                        <h5>24/7 Emergency Care</h5>
+                        <p class="text-muted">Round-the-clock emergency services with dedicated emergency response team</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="feature-icon bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-person-check fs-2 text-success"></i>
+                        </div>
+                        <h5>Expert Medical Team</h5>
+                        <p class="text-muted">Highly qualified and experienced doctors across all specialties</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="feature-icon bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-heart-pulse fs-2 text-info"></i>
+                        </div>
+                        <h5>Advanced Technology</h5>
+                        <p class="text-muted">State-of-the-art medical equipment and diagnostic facilities</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="text-center">
+                        <div class="feature-icon bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="bi bi-geo-alt fs-2 text-warning"></i>
+                        </div>
+                        <h5>Multiple Locations</h5>
+                        <p class="text-muted">Conveniently located hospitals across the region</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>window.OPENROUTER_API_KEY='';window.OPENROUTER_REFERER='';window.OPENROUTER_TITLE='HMS';</script>
+    <script src="js/openrouter.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Check auth status on page load to show logout button if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof checkAuthStatus === 'function') {
+                checkAuthStatus();
+            }
+        });
+    </script>
+    <!-- AI Support is now on a separate page -->
+</body>
+</html>

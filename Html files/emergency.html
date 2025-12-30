@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency & Contact - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Add padding to body to accommodate fixed navbar */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold" style="margin-top:20px;">Emergency & Contact Us</h1>
+            <p class="lead text-muted">24/7 emergency care and support services</p>
+        </div>
+
+        <!-- Emergency Hotline Numbers -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0 fw-semibold">
+                    <i class="bi bi-telephone-fill me-2"></i>Emergency Hotline Numbers
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-danger-subtle text-danger border-0 h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-truck-front-fill fs-1 mb-2 text-danger"></i>
+                                <h5 class="fw-semibold">Ambulance</h5>
+                                <p class="mb-0 fs-5 fw-bold text-danger">017XXXXXXX</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-warning-subtle text-warning border-0 h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-fire fs-1 mb-2 text-warning"></i>
+                                <h5 class="fw-semibold">Fire</h5>
+                                <p class="mb-0 fs-5 fw-bold text-warning">017XXXXXXX</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-primary-subtle text-primary border-0 h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-shield-check fs-1 mb-2 text-primary"></i>
+                                <h5 class="fw-semibold">Police</h5>
+                                <p class="mb-0 fs-5 fw-bold text-primary">017XXXXXXX</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card bg-success-subtle text-success border-0 h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-hospital fs-1 mb-2 text-success"></i>
+                                <h5 class="fw-semibold">Medical Helpline</h5>
+                                <p class="mb-0 fs-5 fw-bold text-success">017XXXXXXX</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ambulance Booking -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0 fw-semibold">
+                    <i class="bi bi-ambulance me-2"></i>Ambulance Booking
+                </h5>
+            </div>
+            <div class="card-body">
+                <!-- Emergency Ambulance Button (5 second hold) -->
+                <div class="text-center mb-4 p-4 bg-white rounded shadow-sm">
+                    <h4 id="ambulanceHeadingText" class="mb-3 fw-bold fs-2">Hold for Ambulance</h4>
+                    <p class="text-muted mb-4 fs-5">Press and hold the ambulance for 5 seconds to send an emergency request.</p>
+                    <button 
+                        id="emergencyAmbulanceBtn" 
+                        class="btn btn-danger btn-lg px-5 py-3 position-relative"
+                        style="min-width: 200px; touch-action: manipulation;"
+                    >
+                        <img src="ambulance-solid.svg" alt="Ambulance" class="ambulance-icon">
+                        <div id="ambulanceProgress" class="position-absolute bottom-0 start-0 bg-warning" style="height: 4px; width: 0%; transition: width 0.1s linear;"></div>
+                    </button>
+                    <div id="ambulanceStatus" class="mt-3" style="min-height: 30px;"></div>
+                </div>
+                
+                <hr class="my-4">
+                
+                <!-- Other Ambulance Options -->
+                <div class="d-flex gap-3 flex-wrap">
+                    <button class="btn btn-outline-primary" onclick="showCallMeForm()">
+                        <i class="bi bi-telephone me-2"></i>Call Me
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showAmbulanceBookingForm()">
+                        <i class="bi bi-calendar-check me-2"></i>Online Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Available Doctors -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0 fw-semibold">
+                    <i class="bi bi-person-vcard-fill me-2"></i>Emergency Available Doctors
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">The following doctors are currently available for emergency consultation:</p>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h5 class="fw-semibold mb-1">Dr. Ayesha Rahman</h5>
+                            <p class="mb-1 text-muted">Consultant, Emergency Medicine</p>
+                            <p class="mb-0 small"><strong>Contact:</strong> +8801XXXXXXXXX</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border rounded p-3 h-100">
+                            <h5 class="fw-semibold mb-1">Dr. Mahmud Hasan</h5>
+                            <p class="mb-1 text-muted">Specialist, Critical Care & Trauma</p>
+                            <p class="mb-0 small"><strong>Contact:</strong> +8801XXXXXXXXX</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blood Bank -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0 fw-semibold">
+                    <i class="bi bi-droplet-fill me-2"></i>Blood Bank
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3">Select a blood group to check availability and request blood:</p>
+                <div class="row g-3 mb-3" id="bloodGrid">
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="A+" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">A+</h5>
+                                <p class="mb-0" id="A+">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="A-" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">A-</h5>
+                                <p class="mb-0" id="A-">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="B+" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">B+</h5>
+                                <p class="mb-0" id="B+">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="B-" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">B-</h5>
+                                <p class="mb-0" id="B-">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="AB+" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">AB+</h5>
+                                <p class="mb-0" id="AB+">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="AB-" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">AB-</h5>
+                                <p class="mb-0" id="AB-">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="O+" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">O+</h5>
+                                <p class="mb-0" id="O+">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card text-center blood-item" data-group="O-" style="cursor:pointer;">
+                            <div class="card-body">
+                                <h5 class="text-danger">O-</h5>
+                                <p class="mb-0" id="O-">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="showBloodRequestForm()">Request Blood</button>
+            </div>
+        </div>
+
+        <!-- Map & Directions -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Map & Directions</h5>
+            </div>
+            <div class="card-body">
+                <p class="mb-3"><strong>Find us at:</strong>University of Liberal Arts Bangladesh</p>
+               <div class="MapBody">
+                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29215.024568619556!2d90.34050752793864!3d23.751727034817304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755bf4ac8e87751%3A0xb69305423ba5f5ef!2sUniversity%20of%20Liberal%20Arts%20Bangladesh!5e0!3m2!1sen!2sbd!4v1763281488254!5m2!1sen!2sbd" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+               </div>
+        </div>
+
+        <!-- Quick Help Form -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="bi bi-question-circle me-2"></i>Quick Help Form</h5>
+            </div>
+            <div class="card-body">
+                <form id="helpForm">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Blood Request Modal -->
+    <div class="modal fade" id="bloodModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request Blood</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="bloodRequestForm">
+                        <div class="mb-3">
+                            <label class="form-label">Blood Group</label>
+                            <input type="text" class="form-control" id="selectedBloodGroup" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Units Required</label>
+                            <input type="number" class="form-control" id="bloodUnits" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Patient Name</label>
+                            <input type="text" class="form-control" id="bloodPatientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" id="bloodContact" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call Me Modal -->
+    <div class="modal fade" id="callMeModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Request Call Back</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="callMeForm">
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="callbackPhone" required placeholder="+8801XXXXXXXXX">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Request Call Back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ambulance Booking Modal -->
+    <div class="modal fade" id="ambulanceModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Book Ambulance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="ambulanceBookingForm">
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="ambulancePhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Pickup Address</label>
+                            <textarea class="form-control" id="pickupAddress" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Preferred Time</label>
+                            <input type="datetime-local" class="form-control" id="ambulanceTime" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Emergency Type</label>
+                            <select class="form-select" id="emergencyType" required>
+                                <option value="EMERGENCY">Emergency</option>
+                                <option value="NON_EMERGENCY">Non-Emergency</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Book Ambulance</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let selectedBloodGroup = null;
+        const bloodModal = new bootstrap.Modal(document.getElementById('bloodModal'));
+        const callMeModal = new bootstrap.Modal(document.getElementById('callMeModal'));
+        const ambulanceModal = new bootstrap.Modal(document.getElementById('ambulanceModal'));
+        
+        // Ambulance 5-second hold functionality
+        let ambulanceHoldInterval = null;
+        let ambulanceHoldTime = 0;
+        const REQUIRED_HOLD_TIME = 5; // seconds
+        let isHolding = false;
+        
+        function startAmbulanceRequest() {
+            if (isHolding) return;
+            
+            isHolding = true;
+            ambulanceHoldTime = 0;
+            const btn = document.getElementById('emergencyAmbulanceBtn');
+            const progressBar = document.getElementById('ambulanceProgress');
+            const statusDiv = document.getElementById('ambulanceStatus');
+            
+            btn.classList.add('active');
+            btn.disabled = false;
+            statusDiv.innerHTML = '<p class="text-info mb-0"><i class="bi bi-hourglass-split me-2"></i>Hold the ambulance icon...</p>';
+            
+            ambulanceHoldInterval = setInterval(() => {
+                ambulanceHoldTime += 0.1;
+                const percentage = (ambulanceHoldTime / REQUIRED_HOLD_TIME) * 100;
+                progressBar.style.width = Math.min(percentage, 100) + '%';
+                
+                const remaining = REQUIRED_HOLD_TIME - ambulanceHoldTime;
+                if (remaining > 0) {
+                    statusDiv.innerHTML = `<p class="text-info mb-0"><i class="bi bi-hourglass-split me-2"></i>Keep holding... ${Math.ceil(remaining)}s left</p>`;
+                }
+                
+                if (ambulanceHoldTime >= REQUIRED_HOLD_TIME) {
+                    completeAmbulanceRequest();
+                }
+            }, 100);
+        }
+        
+        function stopAmbulanceRequest() {
+            if (!isHolding) return;
+            
+            isHolding = false;
+            clearInterval(ambulanceHoldInterval);
+            
+            const btn = document.getElementById('emergencyAmbulanceBtn');
+            const progressBar = document.getElementById('ambulanceProgress');
+            const statusDiv = document.getElementById('ambulanceStatus');
+            
+            if (ambulanceHoldTime < REQUIRED_HOLD_TIME) {
+                // Reset if not held long enough
+                btn.classList.remove('active');
+                progressBar.style.width = '0%';
+                statusDiv.innerHTML = '<p class="text-warning mb-0"><i class="bi bi-exclamation-triangle me-2"></i>Please hold the ambulance icon for the full 5 seconds</p>';
+                
+                // Clear warning after 2 seconds
+                setTimeout(() => {
+                    if (!isHolding) {
+                        statusDiv.innerHTML = '';
+                    }
+                }, 2000);
+            }
+        }
+        
+        function completeAmbulanceRequest() {
+            clearInterval(ambulanceHoldInterval);
+            isHolding = false;
+            
+            const btn = document.getElementById('emergencyAmbulanceBtn');
+            const progressBar = document.getElementById('ambulanceProgress');
+            const statusDiv = document.getElementById('ambulanceStatus');
+            
+            btn.classList.remove('active');
+            btn.classList.add('btn-success');
+            btn.disabled = true;
+            progressBar.style.width = '100%';
+            progressBar.classList.remove('bg-warning');
+            progressBar.classList.add('bg-success');
+            
+            statusDiv.innerHTML = `
+                <div class="alert alert-success mb-0">
+                    <h6 class="alert-heading"><i class="bi bi-ambulance me-2"></i>Ambulance is on the way to your location!</h6>
+                    <p class="mb-0">Our emergency response team has been notified and an ambulance is heading to your location. Please stay where you are.</p>
+                    <hr>
+                    <p class="mb-0 small"><strong>Estimated arrival:</strong> 15-20 minutes</p>
+                </div>
+            `;
+            
+            // Send request to backend
+            sendAmbulanceRequest();
+        }
+        
+        async function sendAmbulanceRequest() {
+            try {
+                const response = await fetch(`${API_BASE}/emergency/ambulance`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phoneNumber: 'Emergency Request',
+                        pickupAddress: 'Emergency location',
+                        pickupTime: new Date().toISOString(),
+                        emergencyType: 'EMERGENCY',
+                        estimatedArrival: '15-20 minutes'
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Ambulance request sent successfully');
+                } else {
+                    console.error('Failed to send ambulance request');
+                }
+            } catch (error) {
+                console.error('Error sending ambulance request:', error);
+                // Don't show error to user as the visual confirmation is already shown
+            }
+        }
+
+        async function loadBloodBank() {
+            try {
+                const response = await fetch(`${API_BASE}/emergency/blood-bank`);
+                const inventory = await response.json();
+                
+                inventory.forEach(blood => {
+                    const element = document.getElementById(blood.bloodGroup);
+                    if (element) {
+                        element.textContent = `${blood.unitsAvailable || 0} units available`;
+                        const item = element.closest('.blood-item');
+                        if (blood.unitsAvailable === 0) {
+                            item.style.opacity = '0.5';
+                            item.style.cursor = 'not-allowed';
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading blood bank:', error);
+            }
+        }
+
+        document.querySelectorAll('.blood-item').forEach(item => {
+            item.addEventListener('click', function() {
+                if (this.style.opacity !== '0.5') {
+                    document.querySelectorAll('.blood-item').forEach(i => i.classList.remove('border-primary', 'border-2'));
+                    this.classList.add('border-primary', 'border-2');
+                    selectedBloodGroup = this.dataset.group;
+                }
+            });
+        });
+
+        function showBloodRequestForm() {
+            if (!selectedBloodGroup) {
+                alert('Please select a blood group first');
+                return;
+            }
+            document.getElementById('selectedBloodGroup').value = selectedBloodGroup;
+            bloodModal.show();
+        }
+
+        function showCallMeForm() {
+            callMeModal.show();
+        }
+
+        function showAmbulanceBookingForm() {
+            const today = new Date();
+            today.setMinutes(today.getMinutes() + 20);
+            document.getElementById('ambulanceTime').value = today.toISOString().slice(0, 16);
+            ambulanceModal.show();
+        }
+
+        document.getElementById('bloodRequestForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const requestData = {
+                bloodGroup: selectedBloodGroup,
+                units: parseInt(document.getElementById('bloodUnits').value),
+                patientName: document.getElementById('bloodPatientName').value,
+                contactNumber: document.getElementById('bloodContact').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/emergency/blood-bank/request`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData)
+                });
+
+                if (response.ok) {
+                    alert('Blood request submitted successfully!');
+                    bloodModal.hide();
+                    document.getElementById('bloodRequestForm').reset();
+                    loadBloodBank();
+                } else {
+                    alert('Blood not available. Please try another blood group.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting request');
+            }
+        });
+
+        document.getElementById('callMeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('callbackPhone').value;
+
+            try {
+                const response = await fetch(`${API_BASE}/emergency/ambulance/call-me`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phoneNumber })
+                });
+
+                if (response.ok) {
+                    alert('We will call you back shortly!');
+                    callMeModal.hide();
+                    document.getElementById('callMeForm').reset();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting request');
+            }
+        });
+
+        document.getElementById('ambulanceBookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const bookingData = {
+                phoneNumber: document.getElementById('ambulancePhone').value,
+                pickupAddress: document.getElementById('pickupAddress').value,
+                pickupTime: document.getElementById('ambulanceTime').value,
+                emergencyType: document.getElementById('emergencyType').value,
+                estimatedArrival: '~20 minutes'
+            };
+
+            try {
+                const response = await fetch(`${API_BASE}/emergency/ambulance`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bookingData)
+                });
+
+                if (response.ok) {
+                    alert('Ambulance booking confirmed! Expected arrival: ~20 minutes');
+                    ambulanceModal.hide();
+                    document.getElementById('ambulanceBookingForm').reset();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error booking ambulance');
+            }
+        });
+
+        document.getElementById('helpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message. We will contact you soon!');
+            this.reset();
+        });
+
+        // Setup emergency ambulance button event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const ambulanceBtn = document.getElementById('emergencyAmbulanceBtn');
+            
+            // Mouse events
+            ambulanceBtn.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                startAmbulanceRequest();
+            });
+            
+            ambulanceBtn.addEventListener('mouseup', function(e) {
+                e.preventDefault();
+                stopAmbulanceRequest();
+            });
+            
+            ambulanceBtn.addEventListener('mouseleave', function(e) {
+                if (isHolding) {
+                    stopAmbulanceRequest();
+                }
+            });
+            
+            // Touch events
+            ambulanceBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                startAmbulanceRequest();
+            });
+            
+            ambulanceBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                stopAmbulanceRequest();
+            });
+            
+            ambulanceBtn.addEventListener('touchcancel', function(e) {
+                if (isHolding) {
+                    stopAmbulanceRequest();
+                }
+            });
+        });
+        
+        window.onload = function() {
+            loadBloodBank();
+        };
+    </script>
+</body>
+</html>

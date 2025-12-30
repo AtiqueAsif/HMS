@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Hospital Management System</title>
+    <link href="vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Add padding to body to accommodate fixed navbar */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container-fluid d-flex align-items-center h-100 px-3">
+            <a class="navbar-brand d-flex align-items-center ms-4" href="index.html">
+                <i class="bi bi-heart-pulse-fill text-primary me-2 fs-4"></i>
+                <span class="fw-bold">HMS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#specialities">Specialities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pandemic.html">Pandemic</a></li>
+                    <li class="nav-item"><a class="nav-link" href="emergency.html">Emergency &amp; Contact</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto me-4">
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1 class="display-5 fw-bold" style="margin-top:40px;">Book Appointment</h1>
+                <p class="lead text-muted">Find a doctor, search by name, or view all doctors</p>
+            </div>
+        </div>
+
+        <!-- Success Notification Panel -->
+        <div id="successNotification" class="alert alert-success alert-dismissible fade show d-none" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill me-2 fs-4"></i>
+                <div>
+                    <strong>Appointment Request Accepted!</strong>
+                    <p class="mb-0">Your appointment request has been successfully submitted. You will be notified once it is confirmed.</p>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Main Options -->
+        <div id="mainOptions" class="row g-4 mb-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-search fs-3 text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Find a Doctor</h5>
+                        <p class="card-text text-muted">Search by Department</p>
+                        <button class="btn btn-primary" onclick="showFindDoctor()">Find Doctor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-person-badge fs-3 text-info"></i>
+                        </div>
+                        <h5 class="card-title">Search a Doctor</h5>
+                        <p class="card-text text-muted">Search by Name</p>
+                        <button class="btn btn-info" onclick="showSearchDoctor()">Search Doctor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 text-center">
+                    <div class="card-body p-4">
+                        <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-list-ul fs-3 text-success"></i>
+                        </div>
+                        <h5 class="card-title">View All Doctors</h5>
+                        <p class="card-text text-muted">See complete list</p>
+                        <button class="btn btn-success" onclick="showAllDoctors()">View All</button>
+                    </div>
+                </div>
+            </div>
+                            </div>
+                            
+        <!-- Find Doctor by Department -->
+        <div id="findDoctorSection" class="d-none">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-building me-2"></i>Find a Doctor by Department</h5>
+                                </div>
+                <div class="card-body">
+                    <select id="departmentSelect" class="form-select mb-3" onchange="loadDoctorsByDepartment()">
+                        <option value="">Select Department</option>
+                                    </select>
+                    <div id="departmentDoctors" class="row g-3"></div>
+                    <button class="btn btn-secondary mt-3" onclick="showMainOptions()">← Back</button>
+                </div>
+                                </div>
+                            </div>
+                            
+        <!-- Search Doctor by Name -->
+        <div id="searchDoctorSection" class="d-none">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-search me-2"></i>Search a Doctor by Name</h5>
+                </div>
+                <div class="card-body">
+                    <input type="text" id="doctorNameSearch" class="form-control mb-3" placeholder="Enter doctor name (e.g., Dr. James Carter)" onkeyup="searchDoctorsByName()">
+                    <div id="searchResults" class="row g-3"></div>
+                    <button class="btn btn-secondary mt-3" onclick="showMainOptions()">← Back</button>
+                </div>
+                            </div>
+                            </div>
+                            
+        <!-- View All Doctors -->
+        <div id="allDoctorsSection" class="d-none">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0" style="margin-top:40px;"><i class="bi bi-list-ul me-2"></i>All Doctors</h5>
+                </div>
+                <div class="card-body">
+                    <div id="allDoctorsList" class="row g-3"></div>
+                    <button class="btn btn-secondary mt-3" onclick="showMainOptions()">← Back</button>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Doctor Profile & Appointment Form -->
+        <div id="doctorProfileSection" class="d-none">
+                <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0" id="profileDoctorName" style="margin-top:40px;">Doctor Profile</h5>
+                    </div>
+                    <div class="card-body">
+                    <div id="doctorProfileDetails" class="mb-4"></div>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3" style="margin-top:40px;">Request Appointment</h5>
+                            <form id="appointmentForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Patient ID</label>
+                                        <input type="text" class="form-control" id="patientId" required placeholder="e.g., 242241">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="patientName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Age</label>
+                                        <input type="number" class="form-control" id="patientAge" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Gender</label>
+                                        <select class="form-select" id="patientGender" required>
+                                            <option value="">Select</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="patientPhone" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="patientEmail" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Preferred Date</label>
+                                        <input type="date" class="form-control" id="appointmentDate" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Preferred Time</label>
+                                        <select class="form-select" id="appointmentTime" required>
+                                            <option value="">Select</option>
+                                            <option>09:00 AM - 11:00 AM</option>
+                                            <option>11:00 AM - 01:00 PM</option>
+                                            <option>02:00 PM - 04:00 PM</option>
+                                            <option>04:00 PM - 06:00 PM</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Symptoms / Reason</label>
+                                        <textarea class="form-control" id="symptoms" rows="3" required placeholder="Describe your symptoms or reason for visit"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary">Submit Appointment Request</button>
+                                        <button type="button" class="btn btn-secondary" onclick="showMainOptions()">← Back</button>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer pt-5 pb-4 mt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Care Network</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">About HMS</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Hospital Locations</a></li>
+                        <li><a href="#">Telemedicine</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Clinical Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Emergency & Trauma</a></li>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Funding & NGO Support</a></li>
+                        <li><a href="#">Online Lab Reports</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Patient Tools</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Patient Portal</a></li>
+                        <li><a href="#">Find a Doctor</a></li>
+                        <li><a href="#">Ambulance Booking</a></li>
+                        <li><a href="#">Pandemic Info</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="footer-heading">Partner Services</h6>
+                    <ul class="footer-links">
+                        <li><a href="#">Corporate Health</a></li>
+                        <li><a href="#">International Transfers</a></li>
+                        <li><a href="#">Supplier Relations</a></li>
+                        <li><a href="#">Community Programs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row g-4 mt-2">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <p class="mb-1 fw-semibold text-white">Permanent Campus</p>
+                    <p class="mb-2 text-white-50">688 Beribadh Road, Mohammadpur, Dhaka-1207, Bangladesh</p>
+                    <p class="mb-1 fw-semibold text-white">Admissions Office</p>
+                    <p class="mb-0 text-white-50">House 56, Road 4/A @ Satmasjid Road, Dhanmondi, Dhaka-1209</p>
+                </div>
+            </div>
+            <div class="row g-4 mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-2 small text-white">&copy; 2025 Hospital Management System. All rights reserved.</p>
+                    <p class="mb-0 small text-white">Privacy • Terms • Accessibility</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:8080/api';
+        let selectedDoctor = null;
+
+        window.onload = function() {
+            loadDepartments();
+            setMinDate();
+        };
+
+        function setMinDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('appointmentDate').setAttribute('min', today);
+        }
+
+        function showMainOptions() {
+            document.getElementById('mainOptions').classList.remove('d-none');
+            document.getElementById('findDoctorSection').classList.add('d-none');
+            document.getElementById('searchDoctorSection').classList.add('d-none');
+            document.getElementById('allDoctorsSection').classList.add('d-none');
+            document.getElementById('doctorProfileSection').classList.add('d-none');
+        }
+
+        function showFindDoctor() {
+            document.getElementById('mainOptions').classList.add('d-none');
+            document.getElementById('findDoctorSection').classList.remove('d-none');
+            document.getElementById('searchDoctorSection').classList.add('d-none');
+            document.getElementById('allDoctorsSection').classList.add('d-none');
+            document.getElementById('doctorProfileSection').classList.add('d-none');
+        }
+
+        function showSearchDoctor() {
+            document.getElementById('mainOptions').classList.add('d-none');
+            document.getElementById('findDoctorSection').classList.add('d-none');
+            document.getElementById('searchDoctorSection').classList.remove('d-none');
+            document.getElementById('allDoctorsSection').classList.add('d-none');
+            document.getElementById('doctorProfileSection').classList.add('d-none');
+        }
+
+        function showAllDoctors() {
+            document.getElementById('mainOptions').classList.add('d-none');
+            document.getElementById('findDoctorSection').classList.add('d-none');
+            document.getElementById('searchDoctorSection').classList.add('d-none');
+            document.getElementById('allDoctorsSection').classList.remove('d-none');
+            document.getElementById('doctorProfileSection').classList.add('d-none');
+            loadAllDoctors();
+        }
+
+        async function loadDepartments() {
+            try {
+                const response = await fetch(`${API_BASE}/doctors/departments`);
+                const departments = await response.json();
+                const select = document.getElementById('departmentSelect');
+                departments.forEach(dept => {
+                    const option = document.createElement('option');
+                    option.value = dept;
+                    option.textContent = dept;
+                    select.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading departments:', error);
+            }
+        }
+
+        async function loadDoctorsByDepartment() {
+            const department = document.getElementById('departmentSelect').value;
+            if (!department) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/doctors/department/${encodeURIComponent(department)}`);
+                const doctors = await response.json();
+                displayDoctors(doctors, 'departmentDoctors');
+            } catch (error) {
+                console.error('Error loading doctors:', error);
+            }
+        }
+
+        async function searchDoctorsByName() {
+            const name = document.getElementById('doctorNameSearch').value.trim();
+            if (name.length < 2) {
+                document.getElementById('searchResults').innerHTML = '';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/doctors/search?name=${encodeURIComponent(name)}`);
+                const doctors = await response.json();
+                displayDoctors(doctors, 'searchResults');
+            } catch (error) {
+                console.error('Error searching doctors:', error);
+            }
+        }
+
+        async function loadAllDoctors() {
+            try {
+                const response = await fetch(`${API_BASE}/doctors`);
+                const doctors = await response.json();
+                displayDoctorsGrouped(doctors, 'allDoctorsList');
+            } catch (error) {
+                console.error('Error loading all doctors:', error);
+            }
+        }
+
+        function getDoctorCardTemplate(doctor) {
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">${doctor.name}</h5>
+                            <p class="card-text"><strong>Department:</strong> ${doctor.department}</p>
+                            <p class="card-text"><strong>Qualification:</strong> ${doctor.qualification || 'N/A'}</p>
+                            <p class="card-text"><strong>Experience:</strong> ${doctor.experienceLevel || 'N/A'}</p>
+                            <p class="card-text"><strong>Available:</strong> ${doctor.isAvailable ? 'Yes' : 'No'}</p>
+                            <button class="btn btn-primary w-100" onclick="showDoctorProfile(${doctor.id})">View Profile & Book</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function displayDoctors(doctors, containerId) {
+            const container = document.getElementById(containerId);
+            if (doctors.length === 0) {
+                container.innerHTML = '<div class="col-12"><p class="text-center text-muted">No doctors found.</p></div>';
+                return;
+            }
+
+            container.innerHTML = doctors.map(getDoctorCardTemplate).join('');
+        }
+
+        function displayDoctorsGrouped(doctors, containerId) {
+            const container = document.getElementById(containerId);
+            if (doctors.length === 0) {
+                container.innerHTML = '<div class="col-12"><p class="text-center text-muted">No doctors found.</p></div>';
+                return;
+            }
+
+            const grouped = doctors.reduce((acc, doctor) => {
+                const dept = doctor.department || 'General';
+                if (!acc[dept]) {
+                    acc[dept] = [];
+                }
+                acc[dept].push(doctor);
+                return acc;
+            }, {});
+
+            const sortedDepartments = Object.keys(grouped).sort();
+
+            container.innerHTML = sortedDepartments.map(dept => `
+                <div class="col-12">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2 mb-3 border-start border-4 border-primary">
+                        <i class="bi bi-diagram-3 text-primary me-2"></i>
+                        <h5 class="mb-0">${dept}</h5>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        ${grouped[dept].map(getDoctorCardTemplate).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function showDoctorProfile(doctorId) {
+            try {
+                const response = await fetch(`${API_BASE}/doctors/${doctorId}`);
+                const doctor = await response.json();
+                selectedDoctor = doctor;
+
+                document.getElementById('mainOptions').classList.add('d-none');
+                document.getElementById('findDoctorSection').classList.add('d-none');
+                document.getElementById('searchDoctorSection').classList.add('d-none');
+                document.getElementById('allDoctorsSection').classList.add('d-none');
+                document.getElementById('doctorProfileSection').classList.remove('d-none');
+
+                document.getElementById('profileDoctorName').textContent = doctor.name;
+                document.getElementById('doctorProfileDetails').innerHTML = `
+                    <p><strong>Department:</strong> ${doctor.department}</p>
+                    <p><strong>Qualification:</strong> ${doctor.qualification || 'N/A'}</p>
+                    <p><strong>Experience Level:</strong> ${doctor.experienceLevel || 'N/A'}</p>
+                    <p><strong>Email:</strong> ${doctor.email || 'N/A'}</p>
+                    <p><strong>Phone:</strong> ${doctor.phone || 'N/A'}</p>
+                    <p><strong>Bio:</strong> ${doctor.bio || 'No bio available'}</p>
+                    <p><strong>Available Time Slots:</strong> ${doctor.availableSlots ? doctor.availableSlots.join(', ') : 'Contact for availability'}</p>
+                `;
+            } catch (error) {
+                console.error('Error loading doctor profile:', error);
+                alert('Error loading doctor profile');
+            }
+        }
+
+        document.getElementById('appointmentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!selectedDoctor) {
+                alert('Please select a doctor first');
+                return;
+            }
+
+            const appointmentData = {
+                patientId: document.getElementById('patientId').value,
+                doctorId: selectedDoctor.id,
+                appointmentDate: document.getElementById('appointmentDate').value,
+                appointmentTime: document.getElementById('appointmentTime').value.split(' - ')[0],
+                type: 'IN_PERSON',
+                department: selectedDoctor.department,
+                symptoms: document.getElementById('symptoms').value
+            };
+
+            try {
+                const patientResponse = await fetch(`${API_BASE}/patients/by-patient-id/${appointmentData.patientId}`);
+                let patient = null;
+                if (patientResponse.ok) {
+                    patient = await patientResponse.json();
+                    appointmentData.patientId = patient.id;
+                } else {
+                    alert('Patient ID not found. Please register first or use a valid Patient ID.');
+                    return;
+                }
+
+                const response = await fetch(`${API_BASE}/appointments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(appointmentData)
+                });
+
+                if (response.ok) {
+                    // Show success notification panel instead of alert
+                    document.getElementById('successNotification').classList.remove('d-none');
+                    document.getElementById('appointmentForm').reset();
+                    
+                    // Hide the notification after 5 seconds
+                    setTimeout(() => {
+                        document.getElementById('successNotification').classList.add('d-none');
+                    }, 5000);
+                    
+                    // Show main options after a short delay
+                    setTimeout(() => {
+                        showMainOptions();
+                    }, 3000);
+                } else {
+                    alert('Error submitting appointment request');
+                }
+            } catch (error) {
+                console.error('Error submitting appointment:', error);
+                alert('Error submitting appointment request');
+            }
+        });
+    </script>
+</body>
+</html>
