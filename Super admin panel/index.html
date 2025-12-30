@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <div class="form-box">
+            <div class="panel active" id="login-panel">
+                <h2>Login</h2>
+                
+                
+                <form id="loginForm">
+                    <div class="input-group">
+                        <input type="text" id="login-username" required class="input-field">
+                        <label for="login-username">Username</label>
+                        <div class="glow-line"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="login-password" required class="input-field">
+                        <label for="login-password">Password</label>
+                        <div class="glow-line"></div>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="#" class="forgot show-forgot">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <span>SIGN IN</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <div class="signup-link">
+                        Don't have an account? <a href="#" class="show-register">Register</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel" id="register-panel">
+                <h2>Register</h2>
+                <p>Create a new account</p>
+                
+                <form>
+                    <div class="input-group">
+                        <input type="text" id="register-username" required class="input-field">
+                        <label for="register-username">Username</label>
+                        <div class="glow-line"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="email" id="register-email" required class="input-field">
+                        <label for="register-email">Email</label>
+                        <div class="glow-line"></div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="password" id="register-password" required class="input-field">
+                        <label for="register-password">Password</label>
+                        <div class="glow-line"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="register-confirm-password" required class="input-field">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <div class="glow-line"></div>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <span>REGISTER</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <div class="signup-link">
+                        Already have an account? <a href="#" class="show-login">Login</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="panel" id="forgot-panel">
+                <h2>Forgot Password</h2>
+                <p>Enter your email to reset your password</p>
+                
+                <form>
+                    <div class="input-group">
+                        <input type="email" id="forgot-email" required class="input-field">
+                        <label for="forgot-email">Email</label>
+                        <div class="glow-line"></div>
+                    </div>
+                    
+                    <button type="submit" class="login-btn">
+                        <span>RESET PASSWORD</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                    
+                    <div class="signup-link">
+                        Remember your password? <a href="#" class="show-login">Back to Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="hospital-btn" class="side-btn">Hospitals</div>
+    <div id="hospital-panel" class="side-panel">
+      <div class="panel-head">
+        <div class="panel-title">Connected Hospitals</div>
+        <div class="panel-count" id="hospital-count"></div>
+      </div>
+      <div class="panel-list" id="hospital-list"></div>
+    </div>
+    
+    <script src="particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00d4ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.8,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.4,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00d4ff",
+                        "opacity": 0.6,
+                        "width": 1.5
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": true,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 400,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            var loginPanel = document.getElementById('login-panel');
+            var registerPanel = document.getElementById('register-panel');
+            var forgotPanel = document.getElementById('forgot-panel');
+
+            function showPanel(name) {
+                loginPanel.classList.remove('active');
+                registerPanel.classList.remove('active');
+                forgotPanel.classList.remove('active');
+
+                if (name === 'login') {
+                    loginPanel.classList.add('active');
+                } else if (name === 'register') {
+                    registerPanel.classList.add('active');
+                } else if (name === 'forgot') {
+                    forgotPanel.classList.add('active');
+                }
+            }
+
+            var registerLinks = document.querySelectorAll('.show-register');
+            registerLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showPanel('register');
+                });
+            });
+
+            var forgotLinks = document.querySelectorAll('.show-forgot');
+            forgotLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showPanel('forgot');
+                });
+            });
+
+            var loginLinks = document.querySelectorAll('.show-login');
+            loginLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    showPanel('login');
+                });
+            });
+
+            showPanel('login');
+
+            var loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    window.location.href = '../index.html';
+                });
+            }
+
+            var names = [
+              'Square Hospital',
+              'United Hospital',
+              'LabAID Hospital',
+              'Apollo Hospital',
+              'Mount Elizabeth Hospital',
+              'Bumrungrad Hospital',
+              'Johns Hopkins Hospital'
+            ];
+            var btn = document.getElementById('hospital-btn');
+            var panel = document.getElementById('hospital-panel');
+            var list = document.getElementById('hospital-list');
+            var count = document.getElementById('hospital-count');
+            count.textContent = names.length;
+            list.innerHTML = names.map(function(n){return '<div class="panel-item">'+n+'</div>';}).join('');
+            btn.addEventListener('click', function(){
+              panel.classList.add('open');
+              btn.style.display = 'none';
+            });
+            list.addEventListener('click', function(){
+              panel.classList.remove('open');
+              btn.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
